@@ -1,0 +1,6 @@
+db/*.db
+log/*.log
+tmp/**/*
+doc/api
+doc/app
+morph_deploy.rb
