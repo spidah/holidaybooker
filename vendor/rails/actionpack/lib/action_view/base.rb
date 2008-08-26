@@ -158,6 +158,7 @@ module ActionView #:nodoc:
   # See the ActionView::Helpers::PrototypeHelper::GeneratorMethods documentation for more details.
   class Base
     include ERB::Util
+    extend ActiveSupport::Memoizable
 
     attr_accessor :base_path, :assigns, :template_extension
     attr_accessor :controller
@@ -203,19 +204,6 @@ module ActionView #:nodoc:
     end
     include CompiledTemplates
 
-    def self.helper_modules #:nodoc:
-      helpers = []
-      Dir.entries(File.expand_path("#{File.dirname(__FILE__)}/helpers")).sort.each do |file|
-        next unless file =~ /^([a-z][a-z_]*_helper).rb$/
-        require "action_view/helpers/#{$1}"
-        helper_module_name = $1.camelize
-        if Helpers.const_defined?(helper_module_name)
-          helpers << Helpers.const_get(helper_module_name)
-        end
-      end
-      return helpers
-    end
-
     def self.process_view_paths(value)
       ActionView::PathSet.new(Array(value))
     end
@@ -239,7 +227,7 @@ module ActionView #:nodoc:
       local_assigns ||= {}
 
       if options.is_a?(String)
-        render_file(options, nil, local_assigns)
+        render(:file => options, :locals => local_assigns)
       elsif options == :update
         update_page(&block)
       elsif options.is_a?(Hash)
@@ -262,20 +250,17 @@ module ActionView #:nodoc:
             end
           end
         elsif options[:file]
-          render_file(options[:file], nil, options[:locals])
-        elsif options[:partial] && options[:collection]
-          render_partial_collection(options[:partial], options[:collection], options[:spacer_template], options[:locals], options[:as])
+          if options[:use_full_path]
+            ActiveSupport::Deprecation.warn("use_full_path option has been deprecated and has no affect.", caller)
+          end
+
+          pick_template(options[:file]).render_template(self, options[:locals])
         elsif options[:partial]
-          render_partial(options[:partial], options[:object], options[:locals])
+          render_partial(options)
         elsif options[:inline]
-          render_inline(options[:inline], options[:locals], options[:type])
+          InlineTemplate.new(options[:inline], options[:type]).render(self, options[:locals])
         end
       end
-    end
-
-    # Returns true is the file may be rendered implicitly.
-    def file_public?(template_path)#:nodoc:
-      template_path.split('/').last[0,1] != '_'
     end
 
     # The format to be used when choosing between multiple templates with
@@ -340,39 +325,13 @@ module ActionView #:nodoc:
         template
       end
     end
-
-    extend ActiveSupport::Memoizable
     memoize :pick_template
 
     private
-      # Renders the template present at <tt>template_path</tt>. The hash in <tt>local_assigns</tt>
-      # is made available as local variables.
-      def render_file(template_path, use_full_path = nil, local_assigns = {}) #:nodoc:
-        unless use_full_path == nil
-          ActiveSupport::Deprecation.warn("use_full_path option has been deprecated and has no affect.", caller)
-        end
-
-        if defined?(ActionMailer) && defined?(ActionMailer::Base) && controller.is_a?(ActionMailer::Base) &&
-            template_path.is_a?(String) && !template_path.include?("/")
-          raise ActionViewError, <<-END_ERROR
-  Due to changes in ActionMailer, you need to provide the mailer_name along with the template name.
-
-    render "user_mailer/signup"
-    render :file => "user_mailer/signup"
-
-  If you are rendering a subtemplate, you must now use controller-like partial syntax:
-
-    render :partial => 'signup' # no mailer_name necessary
-          END_ERROR
-        end
-
-        template = pick_template(template_path)
-        template.render_template(self, local_assigns)
+      def extended_by_without_helpers #:nodoc:
+        extended_by.reject { |mod| mod.name =~ /^ActionView::Helpers/ }
       end
-
-      def render_inline(text, local_assigns = {}, type = nil)
-        InlineTemplate.new(text, type).render(self, local_assigns)
-      end
+      memoize :extended_by_without_helpers
 
       # Evaluate the local assigns and pushes them to the view.
       def evaluate_assigns
