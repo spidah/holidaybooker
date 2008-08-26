@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def set_title(title)
+    @title = title
+  end
+
   def print_flash(flash, flash_type, title = nil)
     if flash
       hide_link = link_to_function('Hide') do |page| page["#{flash_type}-flash"].visual_effect :fade end
