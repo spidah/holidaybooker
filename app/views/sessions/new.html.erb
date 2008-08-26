@@ -1,0 +1,16 @@
+<div class="block">
+<h2>Login</h2>
+  <% form_tag(session_url, :id => 'normal_login_form') do -%>
+    <div class="form-row">
+      <label for="loginname" class="label">Loginname</label>
+      <span class="data"><%= text_field_tag('loginname', session[:loginname]) -%></span>
+    </div>
+    <div class="form-row">
+      <label for="password" class="label">Password</label>
+      <span class="data"><%= password_field_tag('password') -%></span>
+    </div>
+    <div class="form-row">
+      <span class="data"><input type="submit" name="login" value="Login" /></span>
+    </div>
+  <% end -%>
+</div>

@@ -1,0 +1,29 @@
+#menu {
+  background-color: #4c9fd4;
+  width: 979px;
+  text-align: center;
+}
+
+#menu ul {
+  list-style: none;
+  width: 979px;
+  padding: 0.3em 0;
+}
+
+#menu ul li {
+  /*float: left;*/
+  display: inline-block;
+  padding: 0 0.5em;
+  border-left: 1px solid #000;
+}
+
+#menu ul li.first {
+  border-left: 0;
+}
+
+#menu ul li a {
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<%= stylesheet_link_tag 'main', 'menu' -%>
+<%= javascript_include_tag 'prototype', 'effects' -%>
+  <title>Holidays</title>
+  <%= menu_extra(@activemenuitem) if @activemenuitem and !@activemenuitem.blank? -%>
+</head>
+
+<body>
+<div id="page">
+  <div id="header">
+    <%= link_to('Holiday Booker', home_path) -%>
+  </div>
+  <%= render :partial => 'shared/menu' -%>
+
+  <div id="main">
+    <div id="content">
+<%= yield %>
+    </div>
+
+    <div id="footer">
+      <div>
+      <span>&copy; Stickiweb Software <%#= year_range(2007) -%></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

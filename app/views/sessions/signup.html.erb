@@ -1,0 +1,21 @@
+<div class="block">
+  <h2>Signup</h2>
+  <%= print_flash(flash[:error], 'error', 'Signup error') -%>
+  <% form_tag(signup_path, :id => 'signup_form') do -%>
+    <div class="form-row">
+      <label for="username" class="label">Username</label>
+      <span class="data"><%= text_field_tag('username') -%></span>
+    </div>
+    <div class="form-row">
+      <label for="password" class="label">Password</label>
+      <span class="data"><%= password_field_tag('password') -%></span>
+    </div>
+    <div class="form-row">
+      <label for="password_confirmation" class="label">Confirm Password</label>
+      <span class="data"><%= password_field_tag('password_confirmation') -%></span>
+    </div>
+    <div class="form-row">
+      <span class="data"><input type="submit" name="signup" value="Signup" /></span>
+    </div>
+  <% end -%>
+</div>
