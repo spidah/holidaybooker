@@ -1,7 +1,7 @@
+<% set_title('Signup') -%>
 <div class="block">
-  <h2>Signup</h2>
-  <%= print_flash(flash[:error], 'error', 'Signup error') -%>
   <% form_tag(signup_path, :id => 'signup_form') do -%>
+    <%= print_flash(flash[:error], 'error', 'Signup error') -%>
     <div class="form-row">
       <label for="username" class="label">Username</label>
       <span class="data"><%= text_field_tag('username') -%></span>
