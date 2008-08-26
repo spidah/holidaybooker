@@ -102,8 +102,6 @@ fieldset {
 
     #content {
       font-size: 14px;
-      width: 100%;
-      float: left;
     }
 
       #content h2 {
@@ -173,6 +171,7 @@ fieldset {
   margin: 0.5em 0;
   padding: 5px 20px 5px 45px;
   text-align: left;
+  width: 50%;
 }
 
 #info-flash {
@@ -182,6 +181,13 @@ fieldset {
   margin: 0.5em 0;
   padding: 5px 20px 5px 45px;
   text-align: left;
+  width: 50%;
+}
+
+#error-flash h5, #info-flash h5 {
+  margin: 0;
+  text-indent: 0;
+  font-weight: bold;
 }
 
 a.sort-header:link, a.sort-header:visited, a.sort-header:active {
@@ -192,6 +198,7 @@ div.block {
   margin-bottom: 1em;
   clear: left;
   overflow: auto;
+  padding-left: 1em;
 }
 
 div.image-left {
