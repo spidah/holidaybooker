@@ -32,7 +32,6 @@ class SessionsController < ApplicationController
   protected
     def password_authentication(username, password)
       if @user = User.authenticate(username, password)
-        reset_session
         session[:user_id] = @user.id
         @user.updated_at = Time.now
         @user.save
