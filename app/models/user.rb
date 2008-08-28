@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
     :too_short => 'Please pick a password between 4 and 40 characters long.',
     :too_long => 'Please pick a password between 4 and 40 characters long.'
   validates_confirmation_of :password, :if => :password_required?, :message => 'Please confirm your password correctly.'
+
   before_save :encrypt_password
+  after_create :create_roles
 
   # Authenticates a user by their username and unencrypted password.  Returns the user or nil.
   def self.authenticate(username, password)
@@ -46,5 +48,11 @@ class User < ActiveRecord::Base
 
     def password_required?
       crypted_password.blank? || !password.blank?
+    end
+
+    def create_roles
+      standard_user_role = Role.find(:conditions => {:name => 'Standard user'})
+      roles << standard_user_role
+      save
     end
 end
