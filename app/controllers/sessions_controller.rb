@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
         successful_login
       else
         reset_session
-        failed_login('Unable to log you in. Please check your loginname and password and try again.')
+        failed_login('Unable to log you in. Please check your username and password and try again.')
       end
     end
 
