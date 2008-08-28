@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery :secret => '81207f35949092cc86f61cd33a241c1477758537a3cab36398fa173dd54389c92e08b3a6dd2022aaaa97a37128f64ef48fc5a076e844fd7bff0cc75a5c919090'
 
   before_filter :get_user
+  before_filter :check_roles
 
   # Filters used throughout the app
 
@@ -23,6 +24,18 @@ class ApplicationController < ActionController::Base
 
     store_location
     redirect_to(login_path)
+  end
+
+  def check_roles
+    if @current_user
+      return true if @current_user.roles.detect {|role|
+        role.rights.detect {|right|
+          right.action == action_name && right.controller == controller_path
+        }
+      }
+
+      redirect_to(request.request_uri)
+    end
   end
 
   def store_location
