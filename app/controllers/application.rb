@@ -26,15 +26,13 @@ class ApplicationController < ActionController::Base
   end
 
   def check_roles
-    if @current_user
-      return true if @current_user.roles.detect {|role|
-        role.rights.detect {|right|
-          right.action == action_name && right.controller == controller_path
-        }
+    return true if @current_user.roles.detect {|role|
+      role.rights.detect {|right|
+        right.action == action_name && right.controller == controller_path
       }
+    }
 
-      redirect_to(request.request_uri)
-    end
+    redirect_to(request.request_uri)
   end
 
   def store_location
