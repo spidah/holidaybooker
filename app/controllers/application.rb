@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       }
     }
 
-    redirect_to(request.request_uri)
+    redirect_to(home_path)
   end
 
   def get_date
