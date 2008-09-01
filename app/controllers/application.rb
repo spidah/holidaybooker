@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_user
 
-  # Filters used throughout the app
+  # Filters and methods used throughout the app
 
   def get_user
     begin
@@ -33,6 +33,11 @@ class ApplicationController < ActionController::Base
     }
 
     redirect_to(request.request_uri)
+  end
+
+  def get_date
+    Time.zone = 'Europe/London'
+    Time.zone.now.to_date
   end
 
   def store_location
