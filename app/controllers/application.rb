@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery :secret => '81207f35949092cc86f61cd33a241c1477758537a3cab36398fa173dd54389c92e08b3a6dd2022aaaa97a37128f64ef48fc5a076e844fd7bff0cc75a5c919090'
 
   before_filter :get_user
-  before_filter :check_roles
 
   # Filters used throughout the app
 
