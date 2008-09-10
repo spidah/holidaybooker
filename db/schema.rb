@@ -9,7 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080826133509) do
+ActiveRecord::Schema.define(:version => 20080910134802) do
+
+  create_table "departments", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "departments_heads", :id => false, :force => true do |t|
+    t.integer "department_id"
+    t.integer "user_id"
+  end
+
+  create_table "departments_users", :id => false, :force => true do |t|
+    t.integer "department_id"
+    t.integer "user_id"
+  end
 
   create_table "rights", :force => true do |t|
     t.string "name"

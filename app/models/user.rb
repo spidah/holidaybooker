@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
+  belongs_to :department, :through => 'departments_users'
 
   attr_accessor :password
   attr_accessible :password
