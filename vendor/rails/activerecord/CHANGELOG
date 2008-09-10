@@ -1,5 +1,15 @@
 *Edge*
 
+* Added find_last_by dynamic finder #762 [miloops]
+
+* Internal API: configurable association options and build_association method for reflections so plugins may extend and override.  #985 [Hongli Lai]
+
+* Changed benchmarks to be reported in milliseconds [DHH]
+
+* Connection pooling.  #936 [Nick Sieger]
+
+* Merge scoped :joins together instead of overwriting them. May expose scoping bugs in your code!  #501 [Andrew White]
+
 * before_save, before_validation and before_destroy callbacks that return false will now ROLLBACK the transaction.  Previously this would have been committed before the processing was aborted. #891 [Xavier Noria]
 
 * Transactional migrations for databases which support them.  #834 [divoxx, Adam Wiggins, Tarmo Tänav]
