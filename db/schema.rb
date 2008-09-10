@@ -15,16 +15,6 @@ ActiveRecord::Schema.define(:version => 20080910134802) do
     t.string "name"
   end
 
-  create_table "departments_heads", :id => false, :force => true do |t|
-    t.integer "department_id"
-    t.integer "user_id"
-  end
-
-  create_table "departments_users", :id => false, :force => true do |t|
-    t.integer "department_id"
-    t.integer "user_id"
-  end
-
   create_table "rights", :force => true do |t|
     t.string "name"
     t.string "controller"
@@ -61,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20080910134802) do
     t.string   "salt",             :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "department_id"
+    t.boolean  "head"
   end
 
 end

@@ -4,18 +4,18 @@ class AddDepartments < ActiveRecord::Migration
       t.string :name
     end
 
-    create_table :departments_users, :id => false do |t|
-      t.integer :department_id, :user_id
-    end
-
-    create_table :departments_heads, :id => false do |t|
-      t.integer :department_id, :user_id
+    change_table :users do |t|
+      t.belongs_to :department
+      t.boolean :head
     end
   end
 
   def self.down
-    drop_table :departments_heads
-    drop_table :departments_users
     drop_table :departments
+
+    change_table :users do |t|
+      t.remove :department_id
+      t.remove :head
+    end
   end
 end
