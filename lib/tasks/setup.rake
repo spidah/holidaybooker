@@ -29,7 +29,7 @@ namespace :db do
 
     desc "Load initial roles and rights into the current environment's database."
     task :roles => :environment do
-      puts "--- Adding roles and rights"
+      puts "--- Adding roles and rights (if any)"
 
       create_role('Admin')
 
