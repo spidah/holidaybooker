@@ -27,9 +27,13 @@ class ApplicationController < ActionController::Base
 
   def check_roles
     return true if @current_user.roles.detect {|role|
-      role.rights.detect {|right|
-        right.action == action_name && right.controller == controller_path
-      }
+      if role.name == 'Admin'
+        true
+      else
+        role.rights.detect {|right|
+          right.action == action_name && right.controller == controller_path
+        }
+      end
     }
 
     redirect_to(home_path)
