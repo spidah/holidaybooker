@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     end
 
     def create_roles
-      standard_user_role = Role.find(:conditions => {:name => 'Standard user'})
+      standard_user_role = Role.find(:first, :conditions => {:name => 'Standard user'})
       roles << standard_user_role
       save
     end
