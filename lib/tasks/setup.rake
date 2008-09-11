@@ -1,11 +1,37 @@
-namespace :db do
-  desc "Loads initial roles and rights into the current environment's database."
-  task :roles => ['db:roles:load']
+require 'highline/import'
 
-  namespace :roles do
+namespace :db do
+  desc "Setup the application for first use."
+  task :setup => ['db:setup:setup']
+
+  namespace :setup do
+    desc "Setup the application for first use."
+    task :setup => :environment do
+      do_admin = User.count == 0
+
+      if do_admin
+        username = ask('Admin username: ')
+        password = ask('Admin password: ') { |p| p.echo = '*' }
+        passconf = ask('Retype password: ') { |p| p.echo = '*' }
+      end
+
+      Rake::Task["db:setup:roles"].invoke
+
+      if do_admin
+        puts "--- Creating admin user"
+        admin_user = create_user(username, password, passconf)
+        puts "--- #{username} created"
+        admin_role = find_role('Admin')
+        admin_user.roles.clear
+        admin_user.roles << admin_role
+      end
+    end
+
     desc "Load initial roles and rights into the current environment's database."
-    task :load => :environment do
-      ActiveRecord::Base.establish_connection(RAILS_ENV.to_sym)
+    task :roles => :environment do
+      puts "--- Adding roles and rights"
+
+      create_role('Admin')
 
       standard_user_role = create_role('Standard user')
 
@@ -17,18 +43,30 @@ namespace :db do
       create_right(standard_user_role, 'Edit holiday page', 'holidays', 'edit')
       create_right(standard_user_role, 'Update holiday page', 'holidays', 'update')
 
-      standard_user_role.save
+      puts "--- Finished adding roles and rights"
     end
   end
 end
 
 private
+  def create_user(username, password, password_confirmation)
+    u = User.new
+    u.username = username
+    u.password = password
+    u.password_confirmation = password_confirmation
+    u.save
+    u
+  end
+
+  def find_role(name)
+    Role.find(:first, :conditions => {:name => name})
+  end
+
   def create_role(name)
-    if !(role = Role.find(:first, :conditions => {:name => name}))
+    if !(role = find_role(name))
       puts "Creating role: #{name}"
-      Role.create(name)
+      Role.create(:name => name)
     else
-      puts "Role exists: #{name}"
       role
     end
   end
@@ -38,7 +76,5 @@ private
       puts "Creating right: #{name}"
       right = Right.create(:name => name, :controller => controller, :action => action)
       role.rights << right
-    else
-      puts "Right exists: #{name}"
     end
   end
