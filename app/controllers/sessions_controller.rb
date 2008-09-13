@@ -21,6 +21,8 @@ class SessionsController < ApplicationController
       user.username = params[:username]
       user.password = params[:password]
       user.password_confirmation = params[:password_confirmation]
+      user.firstname = params[:firstname]
+      user.surname = params[:surname]
       if user.save
         password_authentication(params[:username], params[:password])
       else

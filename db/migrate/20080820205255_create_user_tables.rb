@@ -1,7 +1,7 @@
 class CreateUserTables < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
-      t.string :username
+      t.string :username, :firstname, :surname
       t.string :crypted_password, :salt, :limit => 40
       t.timestamps
     end
