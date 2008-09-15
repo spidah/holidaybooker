@@ -10,12 +10,21 @@ class ApplicationController < ActionController::Base
 
   # Filters and methods used throughout the app
 
+  def include_extra_stylesheet(*source)
+    @extra_stylesheets ||= []
+    source.each { |file| @extra_stylesheets << file.to_s }
+  end
+
   def get_user
     begin
       @current_user ||= User.find(session[:user_id])
     rescue
       @current_user = nil
     end
+  end
+
+  def current_date
+    Date.today
   end
 
   def check_login
