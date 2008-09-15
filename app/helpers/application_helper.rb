@@ -32,4 +32,12 @@ module ApplicationHelper
     css << "-->\n"
     css << "</style>\n"
   end
+
+  def div_block(&block)
+    concat("<div class=\"block\">" + capture(&block) + "</div>")
+  end
+
+  def month_name(date)
+    date.strftime('%B %Y')
+  end
 end
