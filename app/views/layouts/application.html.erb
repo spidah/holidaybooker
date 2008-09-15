@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-<%= stylesheet_link_tag 'main', 'menu' -%>
-<%= javascript_include_tag 'prototype', 'effects' -%>
+<%= stylesheet_link_tag('main', 'menu') -%>
+<%= stylesheet_link_tag(@extra_stylesheets) if @extra_stylesheets -%>
+<%= javascript_include_tag('prototype', 'effects') -%>
   <title>Holidays</title>
   <%= menu_extra(@activemenuitem) if @activemenuitem and !@activemenuitem.blank? -%>
 </head>
