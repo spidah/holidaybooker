@@ -82,6 +82,7 @@ $(document).ready(function() {
       strToDate(dstring, endDate);
       dateField = 0;
     }
+    checkDates();
     colourDays();
     outputDates();
   };
