@@ -4,7 +4,6 @@
 
   #calendar div.month-header {
     border: 1px solid #838b8b;
-    overflow: none;
   }
 
     #calendar div.month-header div.prev-month {
@@ -19,53 +18,43 @@
       text-align: center;
     }
 
-  #calendar div.days {
-    clear: both;
-    overflow: auto;
-  }
-
-    #calendar div.days div.week {
-      clear: both;
-      overflow: auto;
+    #calendar div.days div.week div.day {
+      border-bottom: 1px solid #838b8b;
+      border-left: 1px solid #838b8b;
+      float: left;
+      text-align: center;
+      width: 89px;
     }
 
-      #calendar div.days div.week div.day {
-        border-bottom: 1px solid #838b8b;
-        border-left: 1px solid #838b8b;
-        float: left;
-        text-align: center;
-        width: 89px;
-      }
+    #calendar div.days div.week div.last {
+      border-right: 1px solid #838b8b;
+    }
 
-      #calendar div.days div.week div.last {
-        border-right: 1px solid #838b8b;
-      }
+    #calendar div.days div.week div.blank {
+      background-color: #c1cdcd;
+    }
 
-      #calendar div.days div.week div.blank {
-        background-color: #c1cdcd;
-      }
+    #calendar div.days div.week div.data {
+      height: 89px;
+      text-align: left;
+    }
 
-      #calendar div.days div.week div.data {
-        height: 89px;
-        text-align: left;
-      }
+    #calendar div.days div.week div.today {
+      background-color: #87ceeb;
+    }
 
-      #calendar div.days div.week div.today {
-        background-color: #87ceeb;
-      }
+    #calendar div.days div.week div.data span.number {
+      border-bottom: 1px solid #838b8b;
+      border-right: 1px solid #838b8b;
+      font-size: 85%;
+    }
 
-      #calendar div.days div.week div.data span.number {
-        border-bottom: 1px solid #838b8b;
-        border-right: 1px solid #838b8b;
-        font-size: 85%;
-      }
+    #calendar div.days div.week div.selected {
+      background-color: #f00;
+    }
 
-      #calendar div.days div.week div.selected {
-        background-color: #f00;
-      }
-
-      #calendar div.days div.week div.data div a {
-        float: left;
-        padding-left: 10px;
-        padding-top: 2px;
-      }
+    #calendar div.days div.week div.data div a {
+      float: left;
+      padding-left: 10px;
+      padding-top: 2px;
+    }
