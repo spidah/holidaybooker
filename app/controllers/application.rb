@@ -15,6 +15,11 @@ class ApplicationController < ActionController::Base
     source.each { |file| @extra_stylesheets << file.to_s }
   end
 
+  def include_extra_javascript(*source)
+    @extra_javascripts ||= []
+    source.each { |file| @extra_javascripts << file.to_s }
+  end
+
   def get_user
     begin
       @current_user ||= User.find(session[:user_id])
