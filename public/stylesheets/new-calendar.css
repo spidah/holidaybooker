@@ -60,6 +60,10 @@
         font-size: 85%;
       }
 
+      #calendar div.days div.week div.selected {
+        background-color: #f00;
+      }
+
       #calendar div.days div.week div.data div a {
         float: left;
         padding-left: 10px;
