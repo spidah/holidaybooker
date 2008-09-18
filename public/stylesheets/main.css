@@ -198,7 +198,7 @@ div.block {
   margin-bottom: 1em;
   clear: left;
   overflow: auto;
-  padding-left: 1em;
+  padding: 0 1em;
 }
 
 div.image-left {
