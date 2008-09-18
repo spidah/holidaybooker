@@ -7,9 +7,23 @@ $(document).ready(function() {
     $('pre#logging-output').append(message + '\r\n');
   };
 
+  var blankTime = function(date) {
+    date.setMilliseconds(0);
+    date.setSeconds(0);
+    date.setMinutes(0);
+    date.setHours(0);
+  };
+
   var dateToStr = function(date) {
-    return (date.getDate() < 10 ? '0' : '') + date.getDate().toString() +
-      (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1).toString() + date.getYear().toString();
+    return date.getYear().toString() + '-' + (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0' : '') + date.getDate().toString();
+  };
+
+  var strToDate = function(dateStr, date) {
+    arr = dateStr.split('-');
+    date.setDate(new Number(arr[2]));
+    date.setMonth(new Number(arr[1]) - 1);
+    date.setFullYear(new Number(arr[0]));
+    blankTime(date);
   };
 
   var checkDates = function() {
@@ -25,6 +39,7 @@ $(document).ready(function() {
     to.setDate(from.getDate());
     to.setMonth(from.getMonth());
     to.setFullYear(from.getFullYear());
+    blankTime(to);
   };
 
   var colourDays = function() {
@@ -32,13 +47,14 @@ $(document).ready(function() {
     index.setDate(1);
     index.setMonth(startDate.getMonth());
     index.setFullYear(startDate.getFullYear());
+    blankTime(index);
 
     var selectedNumber = 0;
     var notSelectedNumber = 0;
 
     var elem;
     while (true) {
-      elem = $('div#' + dateToStr(index));
+      elem = $('div[title=' + dateToStr(index) + ']');
       if (elem && (index >= startDate) && (index <= endDate)) {
         selectedNumber++;
         elem.addClass('selected');
@@ -47,8 +63,9 @@ $(document).ready(function() {
         elem.removeClass('selected');
       }
       index.setDate(index.getDate() + 1);
-      if (index.getMonth() > endDate.getMonth())
+      if (index.getMonth() > endDate.getMonth()) {
         break;
+      }
     }
   };
 
@@ -61,17 +78,13 @@ $(document).ready(function() {
     var dstring = date.toString();
     if (dateField == 0) {
       startDate = new Date();
-      startDate.setDate(new Number(dstring.substr(0, 2)));
-      startDate.setMonth(new Number(dstring.substr(2, 2)) - 1);
-      startDate.setFullYear(new Number(dstring.substr(4)));
+      strToDate(dstring, startDate);
       endDate = new Date();
       copyDates(endDate, startDate);
       dateField = 1;
     } else {
       endDate = new Date();
-      endDate.setDate(new Number(dstring.substr(0, 2)));
-      endDate.setMonth(new Number(dstring.substr(2, 2)) - 1);
-      endDate.setFullYear(new Number(dstring.substr(4)));
+      strToDate(dstring, endDate);
       dateField = 0;
     }
     colourDays();
@@ -80,7 +93,7 @@ $(document).ready(function() {
 
   var setDayClicks = function() {
     $('div.day').click(function() {
-      var date = $(this).attr('id');
+      var date = $(this).attr('title');
       if (date) {
         setDateBoundary(date);
       }
@@ -89,7 +102,7 @@ $(document).ready(function() {
 
   var setMonthClicks = function() {
     $('a.change-month').click(function() {
-      date = $(this).attr('id');
+      date = $(this).attr('title');
       $.ajax({
         type: 'GET',
         url: '/holidays/change_month',

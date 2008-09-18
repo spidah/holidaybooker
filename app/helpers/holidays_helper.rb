@@ -1,6 +1,6 @@
 module HolidaysHelper
   def link_month(date, text)
-    link_to(text, change_month_holidays_path(:date => date), :id => date, :class => 'change-month')
+    link_to(text, change_month_holidays_path(:date => date), :title => date, :class => 'change-month')
   end
 
   def replace_day(date, day)
