@@ -49,17 +49,12 @@ $(document).ready(function() {
     index.setFullYear(startDate.getFullYear());
     blankTime(index);
 
-    var selectedNumber = 0;
-    var notSelectedNumber = 0;
-
     var elem;
     while (true) {
       elem = $('div[title=' + dateToStr(index) + ']');
       if (elem && (index >= startDate) && (index <= endDate)) {
-        selectedNumber++;
         elem.addClass('selected');
       } else {
-        notSelectedNumber++;
         elem.removeClass('selected');
       }
       index.setDate(index.getDate() + 1);
