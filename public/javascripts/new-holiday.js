@@ -52,7 +52,7 @@ $(document).ready(function() {
     var elem;
     while (true) {
       elem = $('div[title=' + dateToStr(index) + ']');
-      if (elem && (index >= startDate) && (index <= endDate)) {
+      if (elem.length == 1 && (index >= startDate) && (index <= endDate)) {
         elem.addClass('selected');
       } else {
         elem.removeClass('selected');
