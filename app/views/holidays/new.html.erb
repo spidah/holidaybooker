@@ -4,9 +4,14 @@
   <div id="calendar">
 <%= render :partial => 'new_holiday_calendar' -%>
   </div>
+  <div id="calendar-sidebar">
+    <div class="calendar-sidebar-content">
+      <h2>New Holiday</h2>
+      <p>Please select the start and end dates of your holiday.</p>
+      <p>Start date: <span class="start-date"></span></p>
+      <p>End date: <span class="end-date"></span></p>
+      <p class="clear-calendar"><%= link_to('Clear selected calendar dates', new_holiday_path) -%></p>
+      <pre id="logging-output"></pre>
+    </div>
+  </div>
 <% end -%>
-<% div_block do -%>
-  <p>Start date: <span class="start-date"></span></p>
-  <p>End date: <span class="end-date"></span></p>
-  <pre id="logging-output"></pre>
-<% end %>
