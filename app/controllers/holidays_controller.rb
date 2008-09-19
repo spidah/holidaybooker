@@ -5,6 +5,7 @@ class HolidaysController < ApplicationController
   def new
     include_extra_stylesheet('new-calendar')
     include_extra_javascript('new-holiday')
+    @holiday = Holiday.new
     populate_vars
   end
 
