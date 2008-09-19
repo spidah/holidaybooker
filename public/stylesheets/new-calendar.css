@@ -1,5 +1,6 @@
 #calendar {
   width: 631px;
+  float: left;
 }
 
   #calendar div.month-header {
@@ -58,3 +59,20 @@
       padding-left: 10px;
       padding-top: 2px;
     }
+
+#calendar-sidebar {
+  float: right;
+  width: 300px;
+  border-left: 1px solid #838b8b;
+}
+
+  #calendar-sidebar div.calendar-sidebar-content {
+    margin: 0 0.5em;
+  }
+
+  #calendar-sidebar div.calendar-sidebar-content h2 {
+    border-bottom: 1px solid #838b8b;
+    color: #000;
+    font-size: 120%;
+    text-indent: 0;
+  }
