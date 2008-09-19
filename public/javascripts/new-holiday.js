@@ -64,6 +64,10 @@ $(document).ready(function() {
     }
   };
 
+  var clearDays = function() {
+    $('div[title*=-]').removeClass('selected');
+  };
+
   var outputDates = function() {
     $('span.start-date').text(startDate ? startDate.toDateString() : '');
     $('span.end-date').text(endDate ? endDate.toDateString() : '');
@@ -85,6 +89,7 @@ $(document).ready(function() {
     checkDates();
     colourDays();
     outputDates();
+    showClearLink();
   };
 
   var setDayClicks = function() {
@@ -114,8 +119,29 @@ $(document).ready(function() {
     });
   };
 
+  var hideClearLink = function() {
+    $('p.clear-calendar').hide();
+  };
+
+  var showClearLink = function() {
+    $('p.clear-calendar').show();
+  };
+
+  var setupClearLink = function() {
+    hideClearLink();
+    $('p.clear-calendar > a').click(function() {
+      startDate = null;
+      endDate = null;
+      clearDays();
+      outputDates();
+      hideClearLink();
+      return false;
+    });
+  };
+
   setDayClicks();
   setMonthClicks();
+  setupClearLink();
 });
 
 jQuery.ajaxSetup({ 
