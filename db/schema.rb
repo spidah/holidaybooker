@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20080911195448) do
   end
 
   create_table "holidays", :force => true do |t|
+    t.integer  "user_id"
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "total_days"
