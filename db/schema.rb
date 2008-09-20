@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20080911195448) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "total_days"
-    t.string   "reason"
-    t.boolean  "confirmed"
+    t.text     "reason"
+    t.boolean  "confirmed",  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
