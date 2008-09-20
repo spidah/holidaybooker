@@ -110,8 +110,6 @@ module ActiveRecord
 
         @owner.transaction do
           flatten_deeper(records).each do |record|
-            record = @reflection.build_association(record) if @reflection.options[:accessible] && record.is_a?(Hash)
-
             raise_on_type_mismatch(record)
             add_record_to_target_with_callbacks(record) do |r|
               result &&= insert_record(record) unless @owner.new_record?
@@ -240,6 +238,8 @@ module ActiveRecord
       def size
         if @owner.new_record? || (loaded? && !@reflection.options[:uniq])
           @target.size
+        elsif !loaded? && @reflection.options[:group]
+          load_target.size
         elsif !loaded? && !@reflection.options[:uniq] && @target.is_a?(Array)
           unsaved_records = @target.select { |r| r.new_record? }
           unsaved_records.size + count_records
@@ -286,10 +286,6 @@ module ActiveRecord
       # Replace this collection with +other_array+
       # This will perform a diff and delete/add only records that have changed.
       def replace(other_array)
-        other_array.map! do |val|
-          val.is_a?(Hash) ? @reflection.build_association(val) : val
-        end if @reflection.options[:accessible]
-
         other_array.each { |val| raise_on_type_mismatch(val) }
 
         load_target
