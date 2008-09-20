@@ -1,7 +1,6 @@
 class Holiday < ActiveRecord::Base
   belongs_to :user
 
-  before_create :set_confirmed
   before_save :count_working_days
 
   named_scope :unconfirmed, :conditions => {:confirmed => false}
@@ -17,9 +16,5 @@ class Holiday < ActiveRecord::Base
       self[:start_date].upto(self[:end_date]) { |date|
         self[:total_days] += 1 if date.wday != 0 && date.wday != 6
       }
-    end
-
-    def set_confirmed
-      self[:confirmed] = false
     end
 end
