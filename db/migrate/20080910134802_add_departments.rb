@@ -5,7 +5,7 @@ class AddDepartments < ActiveRecord::Migration
     end
 
     change_table :users do |t|
-      t.belongs_to :department
+      t.integer :department_id
       t.boolean :head
     end
   end
