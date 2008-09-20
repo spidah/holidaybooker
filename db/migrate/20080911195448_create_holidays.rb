@@ -1,6 +1,7 @@
 class CreateHolidays < ActiveRecord::Migration
   def self.up
     create_table :holidays do |t|
+      t.integer :user_id
       t.date :start_date, :end_date
       t.integer :total_days
       t.string :reason
