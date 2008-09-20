@@ -1,6 +1,7 @@
 <% set_title('New Holiday') -%>
 
 <% div_block do -%>
+  <%= print_flash(flash[:error], 'error', 'Unable to create holiday') -%>
   <div id="calendar">
 <%= render :partial => 'new_holiday_calendar' -%>
   </div>
@@ -11,6 +12,11 @@
       <p>Start date: <span class="start-date"></span></p>
       <p>End date: <span class="end-date"></span></p>
       <p class="clear-calendar"><%= link_to('Clear selected calendar dates', new_holiday_path) -%></p>
+      <% form_for(@holiday) do |f| -%>
+        <%= f.hidden_field(:start_date) -%>
+        <%= f.hidden_field(:end_date) -%>
+        <%= submit_tag('Create Holiday', :class => 'create-holiday') -%>
+      <% end -%>
       <pre id="logging-output"></pre>
     </div>
   </div>
