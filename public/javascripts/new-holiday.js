@@ -71,6 +71,8 @@ $(document).ready(function() {
   var outputDates = function() {
     $('span.start-date').text(startDate ? startDate.toDateString() : '');
     $('span.end-date').text(endDate ? endDate.toDateString() : '');
+    $('input#holiday_start_date').attr('value', startDate ? dateToStr(startDate) : '');
+    $('input#holiday_end_date').attr('value', endDate ? dateToStr(endDate) : '');
   };
 
   var setDateBoundary = function(date) {
@@ -90,6 +92,7 @@ $(document).ready(function() {
     colourDays();
     outputDates();
     showClearLink();
+    enableFormSubmit();
   };
 
   var setDayClicks = function() {
@@ -127,6 +130,14 @@ $(document).ready(function() {
     $('p.clear-calendar').show();
   };
 
+  var disableFormSubmit = function() {
+    $('input.create-holiday').attr('disabled', 'true');
+  };
+
+  var enableFormSubmit = function() {
+    $('input.create-holiday').removeAttr('disabled');
+  };
+
   var setupClearLink = function() {
     hideClearLink();
     $('p.clear-calendar > a').click(function() {
@@ -135,6 +146,7 @@ $(document).ready(function() {
       clearDays();
       outputDates();
       hideClearLink();
+      disableFormSubmit();
       return false;
     });
   };
@@ -142,6 +154,7 @@ $(document).ready(function() {
   setDayClicks();
   setMonthClicks();
   setupClearLink();
+  disableFormSubmit();
 });
 
 jQuery.ajaxSetup({ 
