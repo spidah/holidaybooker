@@ -9,6 +9,16 @@ class HolidaysController < ApplicationController
     populate_vars
   end
 
+  def create
+    @holiday = Holiday.new(params[:holiday])
+    if @current_user.holidays << @holiday
+      redirect_to(users_path)
+    else
+      flash[:error] = @holiday.errors
+      redirect_to(new_holiday_path)
+    end
+  end
+
   def change_month
     session[:calendar_date] = Date.parse(params[:date]) rescue current_date
     respond_to do |wants|
