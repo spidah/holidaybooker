@@ -10,9 +10,13 @@ namespace :db do
       do_admin = User.count == 0
 
       if do_admin
-        username = ask('Admin username: ')
-        password = ask('Admin password: ') { |p| p.echo = '*' }
-        passconf = ask('Retype password: ') { |p| p.echo = '*' }
+        username = ask('admin username: ')
+        password = '1'
+        passconf = '2'
+        while password != passconf do
+          password = ask('admin password: ') { |p| p.echo = '*' }
+          passconf = ask('retype password: ') { |p| p.echo = '*' }
+        end
       end
 
       Rake::Task["db:setup:roles"].invoke
@@ -24,6 +28,23 @@ namespace :db do
         admin_role = find_role('Admin')
         admin_user.roles.clear
         admin_user.roles << admin_role
+      end
+
+      answer = agree('Add a user? ', true)
+      while answer do
+        username = ask('username: ')
+        password = '1'
+        passconf = '2'
+        while password != passconf do
+          password = ask('password: ') { |p| p.echo = '*' }
+          passconf = ask('retype password: ') { |p| p.echo = '*' }
+        end
+        firstname = ask('firstname: ')
+        surname = ask('surrname: ')
+        create_user(username, password, passconf, firstname, surname)
+        puts "--- #{username} created"
+
+        answer = agree('Add another user? ', true)
       end
     end
 
@@ -50,11 +71,13 @@ namespace :db do
 end
 
 private
-  def create_user(username, password, password_confirmation)
+  def create_user(username, password, password_confirmation, firstname = nil, surname = nil)
     u = User.new
     u.username = username
     u.password = password
     u.password_confirmation = password_confirmation
+    u.firstname = firstname
+    u.surname = surname
     u.save
     u
   end
