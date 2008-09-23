@@ -12,7 +12,7 @@ class HolidaysController < ApplicationController
   def create
     @holiday = Holiday.new(params[:holiday])
     if @current_user.holidays << @holiday
-      redirect_to(users_path)
+      redirect_to(user_path)
     else
       flash[:error] = @holiday.errors
       redirect_to(new_holiday_path)
