@@ -32,6 +32,14 @@ class HolidaysController < ApplicationController
     end
   end
 
+  def confirmed
+    @confirmed = @current_user.holidays.confirmed
+  end
+
+  def unconfirmed
+    @unconfirmed = @current_user.holidays.unconfirmed
+  end
+
   protected
     def populate_vars
       @today = current_date
