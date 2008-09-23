@@ -76,3 +76,11 @@
     font-size: 120%;
     text-indent: 0;
   }
+
+#content form {
+  margin: 0;
+}
+
+label {
+  float: none;
+}
