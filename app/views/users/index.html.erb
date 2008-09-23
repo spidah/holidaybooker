@@ -1,0 +1,10 @@
+<% set_title("Welcome #{@current_user.firstname}") -%>
+<% div_block do -%>
+<% if @confirmed > 0 || @unconfirmed > 0 -%>
+  <p>You have:</p>
+  <p class="holidays-status"><%= link_to_count(@confirmed, 'confirmed', 'holiday', confirmed_holidays_path) -%></p>
+  <p class="holidays-status"><%= link_to_count(@unconfirmed, 'unconfirmed', 'holiday', unconfirmed_holidays_path) -%></p>
+<% else -%>
+  <p>You currently have no submitted holidays.</p>
+<% end -%>
+<% end -%>
