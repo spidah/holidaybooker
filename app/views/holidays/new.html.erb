@@ -8,14 +8,16 @@
   <div id="calendar-sidebar">
     <div class="calendar-sidebar-content">
       <h2>New Holiday</h2>
-      <p>Please select the start and end dates of your holiday.</p>
+      <p>Please select the start date, end date, and reason to create your holiday.</p>
       <p>Start date: <span class="start-date"></span></p>
       <p>End date: <span class="end-date"></span></p>
       <p class="clear-calendar"><%= link_to('Clear selected calendar dates', new_holiday_path) -%></p>
       <% form_for(@holiday) do |f| -%>
-        <%= f.hidden_field(:start_date) -%>
-        <%= f.hidden_field(:end_date) -%>
-        <%= submit_tag('Create Holiday', :class => 'create-holiday') -%>
+      <div><label for="holiday_reason">Reason:</label></div>
+      <div><%= f.text_area(:reason, :cols => 20, :rows => 5) -%></div>
+      <div><%= submit_tag('Create Holiday', :class => 'create-holiday') -%></div>
+      <div><%= f.hidden_field(:start_date) -%></div>
+      <div><%= f.hidden_field(:end_date) -%></div>
       <% end -%>
       <pre id="logging-output"></pre>
     </div>
