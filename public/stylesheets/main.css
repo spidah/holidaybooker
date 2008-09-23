@@ -276,3 +276,9 @@ table {
   #content table tr.food-item td.add input {
     vertical-align: middle;
   }
+
+/* other */
+
+p.holidays-status {
+  text-indent: 2em;
+}
