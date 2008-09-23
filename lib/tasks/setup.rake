@@ -64,6 +64,8 @@ namespace :db do
       create_right(standard_user_role, 'Edit holiday page', 'holidays', 'edit')
       create_right(standard_user_role, 'Update holiday page', 'holidays', 'update')
       create_right(standard_user_role, 'Change holiday calendar month', 'holidays', 'change_month')
+      create_right(standard_user_role, 'View confirmed holidays', 'holidays', 'confirmed')
+      create_right(standard_user_role, 'View unconfirmed holidays', 'holidays', 'unconfirmed')
 
       puts "--- Finished adding roles and rights"
     end
