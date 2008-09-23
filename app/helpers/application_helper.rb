@@ -40,4 +40,8 @@ module ApplicationHelper
   def month_name(date)
     date.strftime('%B %Y')
   end
+
+  def format_date(date)
+    date.strftime('%d %B %Y')
+  end
 end
