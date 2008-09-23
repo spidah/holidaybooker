@@ -30,7 +30,12 @@ namespace :db do
         admin_user.roles << admin_role
       end
 
-      answer = agree('Add a user? ', true)
+      Rake::Task["db:setup:add_user"].invoke if agree('Add a user? ', true)
+    end
+
+    desc "Adds users to the current environment's database."
+    task :add_user => :environment do
+      answer = true
       while answer do
         username = ask('username: ')
         password = '1'
