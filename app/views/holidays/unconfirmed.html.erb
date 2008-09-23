@@ -1,0 +1,13 @@
+<% set_title('Unconfirmed Holidays') -%>
+<% div_block do -%>
+<% if @unconfirmed.size > 0 -%>
+  <p>You have <%= pluralize(@unconfirmed.size, 'holiday') -%> awaiting confirmation:</p>
+<% for holiday in @unconfirmed do -%>
+  <p class="holidays-status">
+    <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
+  </p>
+<% end -%>
+<% else -%>
+  <p>You do not currently have any holidays awaiting confirmation.</p>
+<% end -%>
+<% end -%>
