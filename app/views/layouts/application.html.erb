@@ -16,11 +16,9 @@
   </div>
   <%= render :partial => 'shared/menu' -%>
 
-  <div id="main">
-    <div id="content">
-      <h2><%= @title -%></h2>
+  <div id="content">
+    <h2><%= @title -%></h2>
 <%= yield %>
-    </div>
   </div>
 
   <div id="footer">
