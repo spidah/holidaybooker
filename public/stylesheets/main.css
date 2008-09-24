@@ -17,6 +17,7 @@ thead, tr, th, td {
 
 html {
   font-size: 100.01%;
+  background-color: #c5c5c5;
 }
 
 body {
@@ -97,7 +98,6 @@ fieldset {
 
   #main {
     background-color: #fff;
-    /*border: 3px solid #727272;*/
   }
 
     #content {
@@ -149,7 +149,6 @@ fieldset {
     position: relative;
     margin-top: 0.5em;
     font-size: 12px;
-    /*font-weight: bold;*/
   }
 
     #footer div {
