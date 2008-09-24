@@ -13,7 +13,6 @@
 <body>
 <div id="page">
   <div id="header">
-    <%= link_to('Holiday Booker', home_path) -%>
   </div>
   <%= render :partial => 'shared/menu' -%>
 
@@ -22,12 +21,10 @@
       <h2><%= @title -%></h2>
 <%= yield %>
     </div>
+  </div>
 
-    <div id="footer">
-      <div>
-      <span>&copy; Stickiweb Software <%#= year_range(2007) -%></span>
-      </div>
-    </div>
+  <div id="footer">
+    <div><span>&copy; Stickiweb Software <%#= year_range(2007) -%></span></div>
   </div>
 </div>
 
