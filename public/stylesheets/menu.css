@@ -1,28 +1,21 @@
 #menu {
-  background-color: #4c9fd4;
   width: 979px;
-  text-align: center;
+  text-align: right;
 }
 
 #menu ul {
   list-style: none;
-  padding: 0.3em 0;
+  padding-bottom: 0.3em;
 }
 
 #menu ul li {
   display: inline;
   padding: 0 0.3em;
-  border-right: 1px solid #000;
-}
-
-#menu ul li.last {
-  border-right: 0;
-  padding-right: 0;
 }
 
 #menu ul li a {
-  color: #000;
-  font-size: 14px;
+  color: #fff;
+  font-size: 12px;
   font-weight: bold;
   text-decoration: none;
 }
