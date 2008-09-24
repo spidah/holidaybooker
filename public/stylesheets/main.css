@@ -155,15 +155,6 @@ fieldset {
       padding: 0 1em;
     }
 
-    #footer span {
-      /*font-size: 85%;*/
-    }
-
-    #footer span.footer-menu {
-      position: absolute;
-      right: 1em;
-    }
-
 /* misc elements */
 
 #error-flash {
