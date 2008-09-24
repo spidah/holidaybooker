@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  background: #4c9fd4 url(/images/bg-g.gif) repeat-x scroll top left;
+  background: #c5c5c5 url(/images/bg.gif) repeat-x scroll top left;
   color: #000;
   font-family: Verdana, Arial, sans-serif;
   margin: 0;
@@ -78,15 +78,14 @@ fieldset {
 #page {
   margin: 0 auto;
   width: 980px;
-  border: 3px solid black;
 }
 
   #header {
     position: relative;
     width: 980px;
     margin: 0;
-    background: url(/images/header.jpg) no-repeat top left;
-    height: 150px;
+    background: url(/images/logo.jpg) no-repeat scroll 25px 25px;
+    height: 65px;
     text-align: center;
   }
 
@@ -98,10 +97,12 @@ fieldset {
 
   #main {
     background-color: #fff;
+    /*border: 3px solid #727272;*/
   }
 
     #content {
       font-size: 14px;
+      padding: 0.2em;
     }
 
       #content h2 {
@@ -143,24 +144,26 @@ fieldset {
         margin-top: 1em;
       }
 
-    #footer {
-      clear: both;
-      position: relative;
+  #footer {
+    clear: both;
+    position: relative;
+    margin-top: 0.5em;
+    font-size: 12px;
+    /*font-weight: bold;*/
+  }
+
+    #footer div {
+      padding: 0 1em;
     }
 
-      #footer div {
-        border-top: 1px dotted #000;
-        padding: 0.1em 1em;
-      }
+    #footer span {
+      /*font-size: 85%;*/
+    }
 
-      #footer span {
-        font-size: 85%;
-      }
-
-      #footer span.footer-menu {
-        position: absolute;
-        right: 1em;
-      }
+    #footer span.footer-menu {
+      position: absolute;
+      right: 1em;
+    }
 
 /* misc elements */
 
