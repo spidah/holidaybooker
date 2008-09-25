@@ -12,18 +12,14 @@
 
 <body>
 <div id="page">
-  <div id="header">
-  </div>
+  <div id="header"></div>
   <%= render :partial => 'shared/menu' -%>
-
   <div id="content">
     <h2><%= @title -%></h2>
-<%= yield %>
+    <%= yield %>
+    <div class="clear"></div>
   </div>
-
-  <div id="footer">
-    <div>&copy; Stickiweb Software <%#= year_range(2007) -%></div>
-  </div>
+  <div id="footer">&copy; Stickiweb Software <%#= year_range(2007) -%></div>
 </div>
 
 </body>
