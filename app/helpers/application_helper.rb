@@ -5,9 +5,9 @@ module ApplicationHelper
 
   def print_flash(flash, flash_type, title = nil)
     if flash
-      hide_link = link_to_function('Hide') do |page| page["#{flash_type}-flash"].visual_effect :fade end
+      hide_link = '<a href="#" class="hide-flash">Hide</a>'
       title_p = "<h5>#{title}</h5>" if title
-      result = "<div id=\"#{flash_type}-flash\">#{title_p}<p>"
+      result = "<div id=\"#{flash_type}-flash\" class=\"flash\">#{title_p}<p>"
 
       messages = []
       if flash.class == ActiveRecord::Errors
