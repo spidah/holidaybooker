@@ -31,7 +31,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.2em 0;
   padding: 0;
-  text-indent: 0.5em;
 }
 
 h1, h2, h3 {
@@ -99,13 +98,14 @@ fieldset {
   #content {
     background-color: #fff;
     font-size: 14px;
-    padding: 0.2em;
+    padding: 0.2em 1em;
   }
 
     #content h2 {
-      border-bottom: 1px dotted #000;
+      border-bottom: 1px solid #a5a5a5;
       color: #007bC4;
       font-size: 160%;
+      padding-bottom: 0.2em;
     }
 
     #content h3 {
@@ -115,7 +115,7 @@ fieldset {
     }
 
     #content form {
-      margin: 1em 0 1em 0;
+      margin: 1em 0;
     }
 
     #content div.form-row {
@@ -191,7 +191,6 @@ div.block {
   margin-bottom: 1em;
   clear: left;
   overflow: auto;
-  padding: 0 1em;
 }
 
 div.image-left {
