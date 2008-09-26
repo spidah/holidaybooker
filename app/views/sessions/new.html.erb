@@ -4,11 +4,11 @@
     <%= print_flash(flash[:error], 'error', 'Login error') -%>
     <div class="form-row">
       <label for="username" class="label">Username</label>
-      <span class="data"><%= text_field_tag('username', session[:username]) -%></span>
+      <span class="data"><%= text_field_tag('username', session[:username], :class => 'login-input') -%></span>
     </div>
     <div class="form-row">
       <label for="password" class="label">Password</label>
-      <span class="data"><%= password_field_tag('password') -%></span>
+      <span class="data"><%= password_field_tag('password', nil, :class => 'login-input') -%></span>
     </div>
     <div class="form-row">
       <span class="data"><input type="submit" name="login" value="Login" /></span>
