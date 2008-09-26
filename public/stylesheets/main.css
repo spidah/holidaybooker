@@ -83,9 +83,6 @@ fieldset {
   #header {
     background: url(/images/logo.jpg) no-repeat scroll 25px 25px;
     height: 65px;
-    margin: 0;
-    position: relative;
-    text-align: center;
     width: 980px;
   }
 
