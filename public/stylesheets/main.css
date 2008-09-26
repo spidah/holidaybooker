@@ -4,20 +4,20 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, a, abbr, acronym, 
 big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt,
 var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot,
 thead, tr, th, td {
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
   margin: 0;
   padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
 }
 
 /* global tags */
 
 html {
-  font-size: 100.01%;
   background-color: #c5c5c5;
+  font-size: 100.01%;
 }
 
 body {
@@ -81,12 +81,12 @@ fieldset {
 }
 
   #header {
-    position: relative;
-    width: 980px;
-    margin: 0;
     background: url(/images/logo.jpg) no-repeat scroll 25px 25px;
     height: 65px;
+    margin: 0;
+    position: relative;
     text-align: center;
+    width: 980px;
   }
 
     #header a {
@@ -109,9 +109,9 @@ fieldset {
     }
 
     #content h3 {
-      padding: 0 0 3px 0;
-      margin: 0;
       font-size: 110%;
+      margin: 0;
+      padding: 0 0 3px 0;
     }
 
     #content form {
@@ -125,16 +125,16 @@ fieldset {
 
     #content .label {
       float: left;
+      font-size: 95%;
       text-align: right;
       width: 150px;
-      font-size: 95%;
     }
 
     #content span.data {
       float: left;
+      font-size: 95%;
       padding-left: 20px;
       text-align: left;
-      font-size: 95%;
     }
 
     #content input.submit {
@@ -147,8 +147,8 @@ fieldset {
 
   #footer {
     clear: both;
-    margin-top: 0.5em;
     font-size: 12px;
+    margin-top: 0.5em;
   }
 
     #footer div {
@@ -178,9 +178,9 @@ fieldset {
 }
 
 #error-flash h5, #info-flash h5 {
+  font-weight: bold;
   margin: 0;
   text-indent: 0;
-  font-weight: bold;
 }
 
 a.sort-header:link, a.sort-header:visited, a.sort-header:active {
@@ -188,8 +188,8 @@ a.sort-header:link, a.sort-header:visited, a.sort-header:active {
 }
 
 div.block {
-  margin-bottom: 1em;
   clear: left;
+  margin-bottom: 1em;
   overflow: auto;
 }
 
@@ -232,8 +232,8 @@ table {
   }
 
     table tr td form {
-      padding: 0;
       margin: 0;
+      padding: 0;
     }
 
     table tr td.add, table tr td.delete, table tr td.edit {
@@ -261,8 +261,8 @@ table {
   }
   
   #content table tr.food-item td.add form {
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
   
   #content table tr.food-item td.add input {
