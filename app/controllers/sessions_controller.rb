@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
     end
 
     def successful_login
-      redirect_back_or_default(user_path)
+      redirect_back_or_default(home_path)
     end
 
     def failed_login(message)

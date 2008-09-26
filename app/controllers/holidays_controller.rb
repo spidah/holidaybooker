@@ -2,6 +2,11 @@ class HolidaysController < ApplicationController
   before_filter :check_login
   before_filter :check_roles
 
+  def index
+    @confirmed = @current_user.holidays.confirmed.size
+    @unconfirmed = @current_user.holidays.unconfirmed.size
+  end
+
   def new
     include_extra_stylesheet('new-holiday')
     include_extra_javascript('new-holiday')
@@ -12,7 +17,7 @@ class HolidaysController < ApplicationController
   def create
     @holiday = Holiday.new(params[:holiday])
     if @current_user.holidays << @holiday
-      redirect_to(user_path)
+      redirect_to(home_path)
     else
       flash[:error] = @holiday.errors
       redirect_to(new_holiday_path)
