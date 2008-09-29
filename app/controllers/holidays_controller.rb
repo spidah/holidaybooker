@@ -8,8 +8,8 @@ class HolidaysController < ApplicationController
   end
 
   def new
-    include_extra_stylesheet('new-holiday')
-    include_extra_javascript('new-holiday')
+    include_extra_stylesheet('holiday')
+    include_extra_javascript('holiday')
     @holiday = Holiday.new
     populate_vars
   end
@@ -25,8 +25,8 @@ class HolidaysController < ApplicationController
   end
 
   def edit
-    include_extra_stylesheet('new-holiday')
-    include_extra_javascript('new-holiday')
+    include_extra_stylesheet('holiday')
+    include_extra_javascript('holiday')
     @holiday = @current_user.holidays.find(params[:id])
     if @holiday.confirmed
       flash[:error] = 'You are unable to edit a confirmed holiday. Please delete it and submit a new one.'
