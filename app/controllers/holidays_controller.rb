@@ -24,6 +24,19 @@ class HolidaysController < ApplicationController
     end
   end
 
+  def edit
+    include_extra_stylesheet('new-holiday')
+    include_extra_javascript('new-holiday')
+    @holiday = @current_user.holidays.find(params[:id])
+    populate_vars(@holiday.start_date)
+  end
+
+  def destroy
+    @holiday = @current_user.holidays.find(params[:id])
+    @holiday.destroy
+    redirect_to(holidays_path)
+  end
+
   def change_month
     session[:calendar_date] = Date.parse(params[:date]) rescue current_date
     respond_to do |wants|
@@ -46,8 +59,8 @@ class HolidaysController < ApplicationController
   end
 
   protected
-    def populate_vars
-      @today = current_date
+    def populate_vars(date = current_date)
+      @today = date
       @date = session[:calendar_date] || @today
       @weekday = convert_week_day_number(@date.wday)
       @monthstart = convert_week_day_number(@date.beginning_of_month.wday)
