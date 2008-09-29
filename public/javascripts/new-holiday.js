@@ -151,7 +151,7 @@ $(document).ready(function() {
     });
   };
 
-  var checkExisting = function() {
+  var checkExistingDates = function() {
     sd = $('input#holiday_start_date').attr('value');
     ed = $('input#holiday_end_date').attr('value');
     if (sd && ed) {
@@ -166,7 +166,7 @@ $(document).ready(function() {
     return true;
   };
 
-  checkExisting();
+  checkExistingDates();
   if (startDate && endDate) {
     outputDates();
     colourDays();
