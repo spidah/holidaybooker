@@ -1,0 +1,24 @@
+<% set_title('Edit Holiday') -%>
+
+<% div_block do -%>
+  <%= print_flash(flash[:error], 'error', 'Unable to update your holiday') -%>
+  <div id="calendar">
+<%= render :partial => 'holiday_calendar' -%>
+  </div>
+  <div id="calendar-sidebar">
+    <div class="calendar-sidebar-content">
+      <h2>Edit Holiday</h2>
+      <p>Please reselect the start date and end date, or edit the reason to update your holiday.</p>
+      <p>Start date: <span class="start-date"></span></p>
+      <p>End date: <span class="end-date"></span></p>
+      <p class="clear-calendar"><%= link_to('Clear selected calendar dates', edit_holiday_path(@holiday)) -%></p>
+      <% form_for(@holiday) do |f| -%>
+      <div><label for="holiday_reason">Reason:</label></div>
+      <div><%= f.text_area(:reason, :cols => 30, :rows => 5) -%></div>
+      <div><%= submit_tag('Update Holiday', :class => 'holiday-submit') -%></div>
+      <div><%= f.hidden_field(:start_date) -%></div>
+      <div><%= f.hidden_field(:end_date) -%></div>
+      <% end -%>
+    </div>
+  </div>
+<% end -%>
