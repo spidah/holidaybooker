@@ -173,11 +173,11 @@ $(document).ready(function() {
   }
   if (calendarEnabled()) {
     setDayClicks();
-    setMonthClicks();
     setupClearLink();
   } else {
     hideClearLink();
   }
+  setMonthClicks();
   disableFormSubmit();
 });
 
