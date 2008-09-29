@@ -84,3 +84,7 @@
 label {
   float: none;
 }
+
+a.change-month:link, a.change-month:visited, a.change-month:active {
+  color: #00f;
+}
