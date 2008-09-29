@@ -131,11 +131,11 @@ $(document).ready(function() {
   };
 
   var disableFormSubmit = function() {
-    $('input.create-holiday').attr('disabled', 'true');
+    $('input.holiday-submit').attr('disabled', 'true');
   };
 
   var enableFormSubmit = function() {
-    $('input.create-holiday').removeAttr('disabled');
+    $('input.holiday-submit').removeAttr('disabled');
   };
 
   var setupClearLink = function() {
@@ -151,9 +151,33 @@ $(document).ready(function() {
     });
   };
 
-  setDayClicks();
-  setMonthClicks();
-  setupClearLink();
+  var checkExisting = function() {
+    sd = $('input#holiday_start_date').attr('value');
+    ed = $('input#holiday_end_date').attr('value');
+    if (sd && ed) {
+      startDate = new Date();
+      strToDate(sd, startDate);
+      endDate = new Date();
+      strToDate(ed, endDate);
+    }
+  };
+
+  var calendarEnabled = function() {
+    return true;
+  };
+
+  checkExisting();
+  if (startDate && endDate) {
+    outputDates();
+    colourDays();
+  }
+  if (calendarEnabled()) {
+    setDayClicks();
+    setMonthClicks();
+    setupClearLink();
+  } else {
+    hideClearLink();
+  }
   disableFormSubmit();
 });
 
