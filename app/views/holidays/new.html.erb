@@ -15,7 +15,7 @@
       <% form_for(@holiday) do |f| -%>
       <div><label for="holiday_reason">Reason:</label></div>
       <div><%= f.text_area(:reason, :cols => 30, :rows => 5) -%></div>
-      <div><%= submit_tag('Create Holiday', :class => 'create-holiday') -%></div>
+      <div><%= submit_tag('Create Holiday', :class => 'holiday-submit') -%></div>
       <div><%= f.hidden_field(:start_date) -%></div>
       <div><%= f.hidden_field(:end_date) -%></div>
       <% end -%>
