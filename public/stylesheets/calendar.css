@@ -45,9 +45,9 @@
     }
 
     #calendar div.days div.week div.data span.number {
+      background-color: #fff;
       border-bottom: 1px solid #838b8b;
       border-right: 1px solid #838b8b;
-      font-size: 85%;
     }
 
     #calendar div.days div.week div.selected {
@@ -61,9 +61,9 @@
     }
 
 #calendar-sidebar {
+  border-left: 1px solid #838b8b;
   float: right;
   width: 300px;
-  border-left: 1px solid #838b8b;
 }
 
   #calendar-sidebar div.calendar-sidebar-content {
