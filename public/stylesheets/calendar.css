@@ -48,6 +48,7 @@
       background-color: #fff;
       border-bottom: 1px solid #838b8b;
       border-right: 1px solid #838b8b;
+      padding: 0 1px 1px 0;
     }
 
     #calendar div.days div.week div.selected {
