@@ -1,0 +1,25 @@
+<% set_title('Admin - Users') -%>
+
+<% div_block do -%>
+  <p>Total users: <%= @users.size -%></p>
+  <table id="users">
+    <tr>
+      <th>Username</th>
+      <th>Firstname</th>
+      <th>Surname</th>
+      <th>Department</th>
+      <th>Head</th>
+      <th>Roles</th>
+    </tr>
+<% for user in @users do -%>
+    <tr>
+      <td><%= user.username -%></td>
+      <td><%= user.firstname -%></td>
+      <td><%= user.surname -%></td>
+      <td><%= user.department -%></td>
+      <td><%= user.head -%></td>
+      <td></td>
+    </tr>
+<% end -%>
+  </table>
+<% end -%>
