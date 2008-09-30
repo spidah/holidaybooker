@@ -1,14 +1,14 @@
 <% set_title('Admin - Users') -%>
 
 <% div_block do -%>
-  <p>Total users: <%= @users.size -%></p>
+  <p>Total users: <%= @users.total_entries -%> (displaying <%= ((@users.current_page - 1) * @users.per_page) + 1 -%> to <%= (((@users.current_page - 1) * @users.per_page)) + @users.size -%>)</p>
   <table id="users">
     <tr>
-      <th>Username</th>
-      <th>Firstname</th>
-      <th>Surname</th>
-      <th>Department</th>
-      <th>Head</th>
+      <th><%= sort_link('Username') -%></th>
+      <th><%= sort_link('Firstname') -%></th>
+      <th><%= sort_link('Surname') -%></th>
+      <th><%= sort_link('Department') -%></th>
+      <th><%= sort_link('Head') -%></th>
       <th>Roles</th>
     </tr>
 <% for user in @users do -%>
@@ -16,10 +16,11 @@
       <td><%= user.username -%></td>
       <td><%= user.firstname -%></td>
       <td><%= user.surname -%></td>
-      <td><%= user.department -%></td>
+      <td><%= user.department.name if user.department -%></td>
       <td><%= user.head -%></td>
       <td></td>
     </tr>
 <% end -%>
   </table>
+  <%= will_paginate(@users) -%>
 <% end -%>

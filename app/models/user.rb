@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     crypted_password == encrypt(password)
   end
 
+  def self.pagination(page, sort = nil, dir = 'ASC')
+    paginate(:page => page, :per_page => 50, :order => sort ? "#{sort} #{dir}" : 'id ASC')
+  end
+
   protected
     def encrypt_password
       return if password.blank?
