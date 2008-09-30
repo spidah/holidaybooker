@@ -61,8 +61,8 @@ namespace :db do
 
       standard_user_role = create_role('Standard user')
 
-      create_right(standard_user_role, 'Users index page', 'users', 'index')
       create_right(standard_user_role, 'Holidays index page', 'holidays', 'index')
+      create_right(standard_user_role, 'Show holiday page', 'holidays', 'show')
       create_right(standard_user_role, 'New holiday page', 'holidays', 'new')
       create_right(standard_user_role, 'Create holiday page', 'holidays', 'create')
       create_right(standard_user_role, 'Destroy holiday page', 'holidays', 'destroy')
