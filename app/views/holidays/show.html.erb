@@ -1,0 +1,15 @@
+<% set_title('Your Holiday') -%>
+
+<% div_block do -%>
+  <div id="calendar" class="disabled">
+<%= render(:partial => 'holiday_calendar') -%>
+  </div>
+  <div id="calendar-sidebar">
+    <div class="calendar-sidebar-content">
+      <h2>Your Holiday</h2>
+      <p>Start date: <span class="start-date"><%= @holiday.start_date -%></span></p>
+      <p>End date: <span class="end-date"><%= @holiday.end_date -%></span></p>
+      <p>Reason: <%= @holiday.reason -%></p>
+    </div>
+  </div>
+<% end -%>

@@ -113,7 +113,9 @@ $(document).ready(function() {
         data: 'date=' + date,
         success: function(html) {
           $('#calendar').html(html);
-          setDayClicks();
+          if (calendarEnabled()) {
+            setDayClicks();
+          }
           setMonthClicks();
           colourDays();
         }
@@ -152,8 +154,13 @@ $(document).ready(function() {
   };
 
   var checkExistingDates = function() {
-    sd = $('input#holiday_start_date').attr('value');
-    ed = $('input#holiday_end_date').attr('value');
+    if ($('input#holiday_start_date').length == 1) {
+      sd = $('input#holiday_start_date').attr('value');
+      ed = $('input#holiday_end_date').attr('value');
+    } else {
+      sd = $('span.start-date').text();
+      ed = $('span.end-date').text();
+    }
     if (sd && ed) {
       startDate = new Date();
       strToDate(sd, startDate);
@@ -163,7 +170,7 @@ $(document).ready(function() {
   };
 
   var calendarEnabled = function() {
-    return true;
+    return !($('div#calendar').hasClass('disabled'));
   };
 
   checkExistingDates();

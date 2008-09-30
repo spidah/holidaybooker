@@ -7,6 +7,13 @@ class HolidaysController < ApplicationController
     @unconfirmed = @current_user.holidays.unconfirmed.size
   end
 
+  def show
+    include_extra_stylesheet('calendar')
+    include_extra_javascript('calendar')
+    @holiday = @current_user.holidays.find(params[:id])
+    populate_vars(@holiday.start_date)
+  end
+
   def new
     include_extra_stylesheet('calendar')
     include_extra_javascript('calendar')
@@ -51,7 +58,7 @@ class HolidaysController < ApplicationController
       end
       wants.js do
         populate_vars
-        render :partial => 'new_holiday_calendar', :layout => false
+        render :partial => 'holiday_calendar', :layout => false
       end
     end
   end
