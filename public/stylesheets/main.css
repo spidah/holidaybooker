@@ -233,7 +233,7 @@ table {
       padding: 0;
     }
 
-    table tr td.add, table tr td.delete, table tr td.edit {
+    table tr td.image {
       text-align: center;
     }
 
