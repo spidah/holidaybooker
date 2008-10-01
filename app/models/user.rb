@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def self.pagination(page, sort = nil, dir = 'ASC')
-    paginate(:page => page, :per_page => 50, :order => sort ? "#{sort} #{dir}" : 'id ASC')
+    paginate(:page => page, :per_page => 50, :order => sort ? "#{sort} #{dir}" : 'id ASC', :include => :department)
   end
 
   protected
