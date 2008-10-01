@@ -10,6 +10,8 @@
       <th><%= sort_link('Department') -%></th>
       <th><%= sort_link('Head') -%></th>
       <th>Roles</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
 <% for user in @users do -%>
     <tr>
@@ -17,8 +19,11 @@
       <td><%= user.firstname -%></td>
       <td><%= user.surname -%></td>
       <td><%= user.department.name if user.department -%></td>
-      <td><%= user.head -%></td>
+      <td class="image"><%= head_image(user.head) -%></td>
       <td></td>
+      <td class="image"><%= link_to image_tag('/images/edit.gif'), edit_admin_user_path(user) -%></td>
+      <td class="image"><%= link_to image_tag('/images/delete.gif'), admin_user_path(user),
+        :confirm => 'Are you sure you want to delete this user?', :method => :delete -%></td>
     </tr>
 <% end -%>
   </table>
