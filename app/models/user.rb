@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :holidays
 
   attr_accessor :password
-  attr_accessible :password
+  attr_accessible :password, :firstname, :surname
 
   validates_presence_of :username, :message => 'You need to enter a username.'
   validates_format_of :username, :with => /\A[a-z0-9\._-]+\Z/i,
@@ -56,6 +56,15 @@ class User < ActiveRecord::Base
     end
 
     save
+  end
+
+  def admin=(admin_value)
+    admin_role = Role.get('Admin')
+    if admin_value
+      roles.find(admin_role.id) rescue roles << admin_role
+    else
+      roles.delete(admin_role)
+    end
   end
 
   protected
