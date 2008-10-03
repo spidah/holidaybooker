@@ -10,11 +10,11 @@
       <span class="data"><%= f.text_field(:surname) -%></span>
     </div>
     <div class="form-row">
-      <label for="user_surname" class="label">Department</label>
+      <label for="department" class="label">Department</label>
       <span class="data"><%= select_tag('department', options_for_select(@departments.collect{ |d| [d.name, d.id] }, @user.department_id)) -%></span>
     </div>
     <div class="form-row">
-      <label for="user_surname" class="label">Admin</label>
+      <label for="admin" class="label">Admin</label>
       <span class="data"><%= @user.id == @current_user.id ? 'true (cannot edit your own admin status)' : check_box_tag('admin', 'admin', @admin) -%></span>
     </div>
     <div class="form-row">
