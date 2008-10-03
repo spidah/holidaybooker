@@ -45,6 +45,19 @@ class User < ActiveRecord::Base
     paginate(:page => page, :per_page => 50, :order => sort ? "#{sort} #{dir}" : 'id ASC', :include => [:department, :roles])
   end
 
+  def change_head
+    self[:head] = !self[:head]
+    department_head_role = Role.get('Department head')
+
+    if self[:head]
+      roles << department_head_role
+    else
+      roles.delete(department_head_role)
+    end
+
+    save
+  end
+
   protected
     def encrypt_password
       return if password.blank?
@@ -57,7 +70,7 @@ class User < ActiveRecord::Base
     end
 
     def create_roles
-      standard_user_role = Role.find(:first, :conditions => {:name => 'Standard user'})
+      standard_user_role = Role.get('Standard user')
       roles << standard_user_role
       save
     end
