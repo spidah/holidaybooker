@@ -7,6 +7,31 @@ class Admin::AdminUsersController < ApplicationController
     @users = User.pagination(params[:page], params[:sort] || 'username', params[:dir] ? 'DESC' : 'ASC')
   end
 
+  def edit
+    @user = User.find(params[:id])
+    admin_role = Role.get('Admin')
+    begin
+      @user.roles.find(admin_role.id)
+      @admin = true
+    rescue
+      @admin = false
+    end
+    @departments = Department.find(:all)
+  end
+
+  def update
+    @user = User.find(params[:id])
+    user_params = params[:user]
+    user_params.delete("head")
+    admin = params[:admin]
+    @user.admin = admin
+    department = Department.find(params[:department])
+    @user.department = department
+    @user.update_attributes(user_params)
+
+    redirect_to(admin_users_path)
+  end
+
   def change_head
     @user = User.find(params[:id])
     @user.change_head
