@@ -72,6 +72,8 @@ namespace :db do
       create_right(standard_user_role, 'View confirmed holidays', 'holidays', 'confirmed')
       create_right(standard_user_role, 'View unconfirmed holidays', 'holidays', 'unconfirmed')
 
+      department_head_role = create_role('Department head')
+
       puts "--- Finished adding roles and rights"
     end
   end
