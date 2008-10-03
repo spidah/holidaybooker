@@ -8,4 +8,8 @@ module Admin::AdminUsersHelper
   def head_image(head)
     image_tag(head ? '/images/tick.gif' : '/images/cross.gif')
   end
+
+  def print_roles(roles)
+    roles.collect(&:name).join(', ')
+  end
 end
