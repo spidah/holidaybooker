@@ -22,7 +22,8 @@ class Admin::AdminUsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     user_params = params[:user]
-    user_params.delete("head")
+    head = user_params[:head] == '1'
+    @user.head = head
     admin = params[:admin]
     @user.admin = admin
     department = Department.find(params[:department])
