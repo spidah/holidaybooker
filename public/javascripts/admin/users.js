@@ -1,11 +1,10 @@
 $(document).ready(function() {
   var setupHeadClick = function() {
     $('a.change-head').click(function() {
-      var elem = this;
-      var row = $(elem).parent().parent().get(0);
+      var row = $(this).parent().parent().get(0);
       $.ajax({
         type: 'GET',
-        url: $(elem).attr('href'),
+        url: $(this).attr('href'),
         success: function(html) {
           $(row).before(html).remove();
           setupHeadClick();
