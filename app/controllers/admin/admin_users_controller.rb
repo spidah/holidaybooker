@@ -34,7 +34,8 @@ class Admin::AdminUsersController < ApplicationController
 
   def change_head
     @user = User.find(params[:id])
-    @user.change_head
+    @user.head = !@user.head
+    @user.save
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
   end
 end

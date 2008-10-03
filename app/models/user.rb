@@ -45,17 +45,14 @@ class User < ActiveRecord::Base
     paginate(:page => page, :per_page => 50, :order => sort ? "#{sort} #{dir}" : 'id ASC', :include => [:department, :roles])
   end
 
-  def change_head
-    self[:head] = !self[:head]
+  def head=(head_value)
     department_head_role = Role.get('Department head')
-
-    if self[:head]
-      roles << department_head_role
+    self[:head] = head_value
+    if head_value
+      roles.find(department_head_role) rescue roles << department_head_role
     else
       roles.delete(department_head_role)
     end
-
-    save
   end
 
   def admin=(admin_value)
