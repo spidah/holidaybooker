@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources         :holidays,                :collection => { :change_month => :get, :confirmed => :get, :unconfirmed => :get }
 
   map.namespace(:admin) do |admin|
-    admin.resources :users,                       :controller => 'admin_users',         :member => { :change_head => :get }
+    admin.resources :users,                       :controller => 'admin_users',         :member => { :change_head => :get, :change_admin => :get }
     admin.resources :departments,                 :controller => 'admin_departments'
   end
 

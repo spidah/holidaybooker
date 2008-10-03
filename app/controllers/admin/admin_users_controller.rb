@@ -5,6 +5,7 @@ class Admin::AdminUsersController < ApplicationController
   def index
     include_extra_javascript('admin/users.js')
     @users = User.pagination(params[:page], params[:sort] || 'username', params[:dir] ? 'DESC' : 'ASC')
+    @admin_role = Role.get('Admin')
   end
 
   def edit
@@ -36,6 +37,15 @@ class Admin::AdminUsersController < ApplicationController
   def change_head
     @user = User.find(params[:id])
     @user.head = !@user.head
+    @user.save
+    render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
+  end
+
+  def change_admin
+    @user = User.find(params[:id])
+    @admin_role = Role.get('Admin')
+    admin = true if @user.roles.find(@admin_role.id) rescue false
+    @user.admin = !admin
     @user.save
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
   end
