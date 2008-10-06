@@ -2,11 +2,6 @@ class HolidaysController < ApplicationController
   before_filter :check_login
   before_filter :check_roles
 
-  def index
-    @confirmed = @current_user.holidays.confirmed.size
-    @unconfirmed = @current_user.holidays.unconfirmed.size
-  end
-
   def show
     include_extra_stylesheet('calendar')
     include_extra_javascript('calendar')
@@ -61,6 +56,11 @@ class HolidaysController < ApplicationController
         render :partial => 'holiday_calendar', :layout => false
       end
     end
+  end
+
+  def submitted
+    @confirmed = @current_user.holidays.confirmed.size
+    @unconfirmed = @current_user.holidays.unconfirmed.size
   end
 
   def confirmed

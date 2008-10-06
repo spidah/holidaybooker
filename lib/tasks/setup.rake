@@ -61,7 +61,6 @@ namespace :db do
 
       standard_user_role = create_role('Standard user')
 
-      create_right(standard_user_role, 'Holidays index page', 'holidays', 'index')
       create_right(standard_user_role, 'Show holiday page', 'holidays', 'show')
       create_right(standard_user_role, 'New holiday page', 'holidays', 'new')
       create_right(standard_user_role, 'Create holiday page', 'holidays', 'create')
@@ -69,10 +68,12 @@ namespace :db do
       create_right(standard_user_role, 'Edit holiday page', 'holidays', 'edit')
       create_right(standard_user_role, 'Update holiday page', 'holidays', 'update')
       create_right(standard_user_role, 'Change holiday calendar month', 'holidays', 'change_month')
+      create_right(standard_user_role, 'Submitted holidays page', 'holidays', 'submitted')
       create_right(standard_user_role, 'View confirmed holidays', 'holidays', 'confirmed')
       create_right(standard_user_role, 'View unconfirmed holidays', 'holidays', 'unconfirmed')
 
       department_head_role = create_role('Department head')
+      create_right(department_head_role, 'Holidays index page', 'holidays', 'index')
 
       puts "--- Finished adding roles and rights"
     end
