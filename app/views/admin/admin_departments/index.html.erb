@@ -1,0 +1,24 @@
+<% set_title('Admin - Departments') -%>
+
+<% div_block do -%>
+  <p>Total departments: <%= @departments.total_entries -%> (displaying <%= ((@departments.current_page - 1) * @departments.per_page) + 1 -%> to <%= (((@departments.current_page - 1) * @departments.per_page)) + @departments.size -%>)</p>
+  <table id="departments">
+    <tr>
+      <th><%= sort_link('Name') -%></th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+<% for department in @departments do -%>
+    <tr>
+      <td><%= department.name -%></td>
+      <td class="image"><%= link_to image_tag('/images/edit.gif'), edit_admin_department_path(department) -%></td>
+      <td class="image"><%= link_to image_tag('/images/delete.gif'), admin_department_path(department),
+        :confirm => 'Are you sure you want to delete this department?', :method => :delete -%></td>
+    </tr>
+<% end -%>
+  </table>
+  <%= will_paginate(@departments) -%>
+<% end -%>
+<% div_block do -%>
+  <p>Would you like to <%= link_to('create a new department', new_admin_department_path) -%>?</p>
+<% end -%>

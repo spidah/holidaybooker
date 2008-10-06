@@ -1,0 +1,16 @@
+<% set_title("Admin - Editing '#{@department.name}' department") -%>
+
+<% div_block do -%>
+  <fieldset>
+    <legend>Edit Department</legend>
+    <% form_for(@department, :url => admin_department_path(@department)) do |f| -%>
+      <div class="form-row">
+        <label for="department_name" class="label">Name</label>
+        <span class="data"><%= f.text_field(:name) -%></span>
+      </div>
+      <div class="form-row">
+        <span class="data"><input type="submit" name="update" value="Update" /></span>
+      </div>
+    <% end -%>
+  </fieldset>
+<% end -%>

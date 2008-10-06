@@ -1,0 +1,16 @@
+<% set_title('Admin - Departments') -%>
+
+<% div_block do -%>
+  <fieldset>
+    <legend>New Department</legend>
+    <% form_for(@department, :url => admin_departments_path) do |f| -%>
+      <div class="form-row">
+        <label for="department_name" class="label">Name</label>
+        <span class="data"><%= f.text_field(:name) -%></span>
+      </div>
+      <div class="form-row">
+        <span class="data"><input type="submit" name="create" value="Create" /></span>
+      </div>
+    <% end -%>
+  </fieldset>
+<% end -%>
