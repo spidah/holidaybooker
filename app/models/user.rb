@@ -45,8 +45,15 @@ class User < ActiveRecord::Base
     paginate(:page => page, :per_page => 50, :order => sort ? "#{sort} #{dir}" : 'id ASC', :include => [:department, :roles])
   end
 
+  def has_role?(role)
+    roles.find(Role.get(role).id)
+    true
+  rescue
+    false
+  end
+
   def head=(head_value)
-    department_head_role = Role.get('Department head')
+    department_head_role = Role.get('head')
     self[:head] = head_value
     if head_value
       roles.find(department_head_role) rescue roles << department_head_role
@@ -56,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def admin=(admin_value)
-    admin_role = Role.get('Admin')
+    admin_role = Role.get('admin')
     if admin_value
       roles.find(admin_role.id) rescue roles << admin_role
     else
@@ -76,7 +83,7 @@ class User < ActiveRecord::Base
     end
 
     def create_roles
-      standard_user_role = Role.get('Standard user')
+      standard_user_role = Role.get('user')
       roles << standard_user_role
       save
     end

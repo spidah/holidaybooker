@@ -10,7 +10,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    redirect_to(home_path) and return if @current_user
+    if @current_user
+      if @current_user.has_role?('admin')
+        redirect_to(admin_users_path)
+      else
+        redirect_to(home_path)
+      end
+
+      return
+    end
 
     password_authentication(params[:username], params[:password])
   end
@@ -33,10 +41,7 @@ class SessionsController < ApplicationController
 
   protected
     def password_authentication(username, password)
-      if @user = User.authenticate(username, password)
-        session[:user_id] = @user.id
-        @user.updated_at = Time.now
-        @user.save
+      if @current_user = user_authenticate(username, password)
         successful_login
       else
         reset_session
@@ -45,7 +50,11 @@ class SessionsController < ApplicationController
     end
 
     def successful_login
-      redirect_back_or_default(home_path)
+      if @current_user.has_role?('admin')
+        redirect_back_or_default(admin_users_path)
+      else
+        redirect_back_or_default(home_path)
+      end
     end
 
     def failed_login(message)

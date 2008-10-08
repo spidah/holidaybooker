@@ -19,13 +19,13 @@ namespace :db do
         end
       end
 
-      Rake::Task["db:setup:roles"].invoke
+      create_roles(['admin', 'user', 'head'])
 
       if do_admin
         puts "--- Creating admin user"
         admin_user = create_user(username, password, passconf)
         puts "--- #{username} created"
-        admin_role = find_role('Admin')
+        admin_role = Role.get('admin')
         admin_user.roles.clear
         admin_user.roles << admin_role
       end
@@ -52,31 +52,6 @@ namespace :db do
         answer = agree('Add another user? ', true)
       end
     end
-
-    desc "Load initial roles and rights into the current environment's database."
-    task :roles => :environment do
-      puts "--- Adding roles and rights (if any)"
-
-      create_role('Admin')
-
-      standard_user_role = create_role('Standard user')
-
-      create_right(standard_user_role, 'Show holiday page', 'holidays', 'show')
-      create_right(standard_user_role, 'New holiday page', 'holidays', 'new')
-      create_right(standard_user_role, 'Create holiday page', 'holidays', 'create')
-      create_right(standard_user_role, 'Destroy holiday page', 'holidays', 'destroy')
-      create_right(standard_user_role, 'Edit holiday page', 'holidays', 'edit')
-      create_right(standard_user_role, 'Update holiday page', 'holidays', 'update')
-      create_right(standard_user_role, 'Change holiday calendar month', 'holidays', 'change_month')
-      create_right(standard_user_role, 'Submitted holidays page', 'holidays', 'submitted')
-      create_right(standard_user_role, 'View confirmed holidays', 'holidays', 'confirmed')
-      create_right(standard_user_role, 'View unconfirmed holidays', 'holidays', 'unconfirmed')
-
-      department_head_role = create_role('Department head')
-      create_right(department_head_role, 'Holidays index page', 'holidays', 'index')
-
-      puts "--- Finished adding roles and rights"
-    end
   end
 end
 
@@ -92,23 +67,10 @@ private
     u
   end
 
-  def find_role(name)
-    Role.find(:first, :conditions => {:name => name})
-  end
-
-  def create_role(name)
-    if !(role = find_role(name))
-      puts "Creating role: #{name}"
-      Role.create(:name => name)
-    else
-      role
-    end
-  end
-
-  def create_right(role, name, controller, action)
-    if !Right.find(:first, :conditions => {:name => name, :controller => controller, :action => action})
-      puts "Creating right: #{name}"
-      right = Right.create(:name => name, :controller => controller, :action => action)
-      role.rights << right
-    end
+  def create_roles(roles)
+    puts "--- Adding roles"
+    roles.each { |role|
+      Role.create(:name => role)
+    }
+    puts "--- Finished adding roles"
   end

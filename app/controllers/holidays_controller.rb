@@ -1,6 +1,6 @@
 class HolidaysController < ApplicationController
-  before_filter :check_login
-  before_filter :check_roles
+  needs_role :admin
+  needs_role :user, :actions => [:new, :create, :show, :edit, :update, :destroy, :submitted, :confirmed, :unconfirmed, :change_month]
 
   def show
     include_extra_stylesheet('calendar')

@@ -21,11 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_user
-    begin
-      @current_user ||= User.find(session[:user_id])
-    rescue
-      @current_user = nil
-    end
+    @current_user ||= current_user
   end
 
   def current_date
@@ -37,20 +33,6 @@ class ApplicationController < ActionController::Base
 
     store_location
     redirect_to(login_path)
-  end
-
-  def check_roles
-    return true if @current_user.roles.detect {|role|
-      if role.name == 'Admin'
-        true
-      else
-        role.rights.detect {|right|
-          right.action == action_name && right.controller == controller_path
-        }
-      end
-    }
-
-    redirect_to(home_path)
   end
 
   def get_date
