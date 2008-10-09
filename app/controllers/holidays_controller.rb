@@ -72,9 +72,9 @@ class HolidaysController < ApplicationController
   end
 
   protected
-    def populate_vars(date = current_date)
-      @today = date
-      @date = session[:calendar_date] || @today
+    def populate_vars(startdate = current_date)
+      @today = current_date
+      @date = session[:calendar_date] || startdate
       @weekday = convert_week_day_number(@date.wday)
       @monthstart = convert_week_day_number(@date.beginning_of_month.wday)
       @monthdays = @date.end_of_month.day

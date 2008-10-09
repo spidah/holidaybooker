@@ -1,4 +1,4 @@
-<div class="day<%= " #{extra}" if defined?(extra) && !extra.blank? -%>" title="<%= date -%>">
+<div class="day<%= " #{extra}" if defined?(extra) && !extra.blank? -%><%= ' today' if @today == date -%>" title="<%= date -%>">
   <div class="data">
     <span class="number"><%= day -%></span>
   </div>
