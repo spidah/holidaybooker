@@ -2,6 +2,11 @@ class RemoveRightsTable < ActiveRecord::Migration
   def self.up
     drop_table :rights
     drop_table :rights_roles
+
+    Role.find(:all).each { |role|
+      role.name = role.name.downcase
+      role.save
+    }
   end
 
   def self.down
