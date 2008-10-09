@@ -38,6 +38,16 @@ class HolidaysController < ApplicationController
     end
   end
 
+  def update
+    @holiday = @current_user.holidays.find(params[:id])
+    params[:holiday].delete(:confirmed)
+    @holiday.update_attributes(params[:holiday])
+    redirect_to(unconfirmed_holidays_path)
+  rescue
+    flash[:error] = @holiday.errors
+    redirect_to(unconfirmed_holidays_path)
+  end
+
   def destroy
     @holiday = @current_user.holidays.find(params[:id])
     confirmed = @holiday.confirmed
