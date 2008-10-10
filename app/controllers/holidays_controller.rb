@@ -1,6 +1,10 @@
 class HolidaysController < ApplicationController
-  needs_role :admin
-  needs_role :user, :actions => [:new, :create, :show, :edit, :update, :destroy, :submitted, :confirmed, :unconfirmed, :change_month]
+  needs_role :user, :actions => [:index, :new, :create, :show, :edit, :update, :destroy, :confirmed, :unconfirmed, :change_month]
+
+  def index
+    @confirmed = @current_user.holidays.confirmed.size
+    @unconfirmed = @current_user.holidays.unconfirmed.size
+  end
 
   def show
     include_extra_stylesheet('calendar')
@@ -66,11 +70,6 @@ class HolidaysController < ApplicationController
         render :partial => 'holiday_calendar', :layout => false
       end
     end
-  end
-
-  def submitted
-    @confirmed = @current_user.holidays.confirmed.size
-    @unconfirmed = @current_user.holidays.unconfirmed.size
   end
 
   def confirmed
