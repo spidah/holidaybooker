@@ -10,6 +10,7 @@ class HolidaysController < ApplicationController
     include_extra_stylesheet('calendar')
     include_extra_javascript('calendar')
     @holiday = @current_user.holidays.find(params[:id])
+    session[:calendar_date] = nil
     populate_vars(@holiday.start_date)
   end
 
@@ -17,6 +18,7 @@ class HolidaysController < ApplicationController
     include_extra_stylesheet('calendar')
     include_extra_javascript('calendar')
     @holiday = Holiday.new
+    session[:calendar_date] = nil
     populate_vars
   end
 
@@ -38,6 +40,7 @@ class HolidaysController < ApplicationController
       flash[:error] = 'You are unable to edit a confirmed holiday. Please delete it and submit a new one.'
       redirect_to(holidays_path)
     else
+      session[:calendar_date] = nil
       populate_vars(@holiday.start_date)
     end
   end
