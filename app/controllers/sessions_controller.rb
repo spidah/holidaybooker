@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       if @current_user.has_role?('admin')
         redirect_to(admin_users_path)
       else
-        redirect_to(home_path)
+        redirect_to(holidays_path)
       end
 
       return
@@ -53,7 +53,7 @@ class SessionsController < ApplicationController
       if @current_user.has_role?('admin')
         redirect_back_or_default(admin_users_path)
       else
-        redirect_back_or_default(home_path)
+        redirect_back_or_default(holidays_path)
       end
     end
 
