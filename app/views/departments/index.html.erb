@@ -1,0 +1,17 @@
+<% set_title('Department Holidays') -%>
+
+<% div_block do -%>
+  <% for user in @users do -%>
+  <p><%= user.fullname -%></p>
+  <% if user.holidays.unconfirmed.size > 0 -%>
+    <% for holiday in user.holidays.unconfirmed do -%>
+  <p class="holidays-status">
+    <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
+    <%= link_to('show', edit_department_path(holiday)) -%>
+  </p>
+    <% end -%>
+  <% else -%>
+  <p class="holidays-status">No pending holidays.</p>
+  <% end -%>
+  <% end -%>
+<% end -%>

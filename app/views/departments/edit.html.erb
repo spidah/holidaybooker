@@ -1,0 +1,12 @@
+<% set_title('Department Holidays') -%>
+<% div_block do -%>
+  <%= print_flash(flash[:error], 'error', 'Unable to update their holiday') -%>
+<%= render :partial => 'department_gantt' -%>
+
+  <div id="gantt-sidebar">
+    <div class="gantt-sidebar-content">
+      <h2>Confirm Holiday</h2>
+      <p>Reason: <%= @holiday.reason -%></p>
+    </div>
+  </div>
+<% end -%>

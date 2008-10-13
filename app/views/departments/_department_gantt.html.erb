@@ -1,0 +1,14 @@
+  <div id="gantt" class="width-<%= @monthdays -%>">
+    <div class="month-header">
+      <div class="prev-month"><%= link_month(@holiday, @prevmonth, "&lt;&lt; #{month_name(@prevmonth)}") -%></div>
+      <div class="next-month"><%= link_month(@holiday, @nextmonth, "#{month_name(@nextmonth)} &gt;&gt;") -%></div>
+      <div class="month"><%= month_name(@date) -%></div>
+    </div>
+<% for user in @users do -%>
+    <div class="user-row">
+      <div class="user-name day"><%= user.surname -%>,<br /><%= user.firstname -%></div>
+<% holidays = get_confirmed_holidays(user, @monthstart, @monthend) -%>
+      <%= render(:partial => 'gantt_month', :locals => {:current_holiday => @holiday.user.id == user.id && @holiday.in_month?(@monthstart) ? @holiday : nil, :holidays => holidays, :monthstart => @monthstart, :monthend => @monthend}) -%>
+    </div>
+<% end -%>
+  </div>

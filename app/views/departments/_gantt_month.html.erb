@@ -1,0 +1,16 @@
+<%
+  days = []
+  populate_days(holidays, current_holiday, days)
+  day = @monthstart
+  while day <= @monthend do
+-%>
+<% if days[day.day] -%>
+<div class="number day <%= days[day.day][:class] -%>" title="<%= days[day.day][:reason] -%>">
+<% else -%>
+<div class="number day">
+<% end -%>
+<%= day.day -%>
+</div>
+<%
+  day += 1
+  end -%>

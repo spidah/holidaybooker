@@ -1,0 +1,102 @@
+#gantt {
+  float: left;
+}
+
+#gantt.width-28 {
+  width: 675px;
+}
+
+#gantt.width-29 {
+  width: 696px;
+}
+
+#gantt.width-30 {
+  width: 717px;
+}
+
+#gantt.width-31 {
+  width: 738px;
+}
+
+  #gantt div.month-header {
+    border: 1px solid #838b8b;
+  }
+
+    #gantt div.month-header div.prev-month {
+      float: left;
+    }
+
+    #gantt div.month-header div.next-month {
+      float: right;
+    }
+
+    #gantt div.month-header div.month {
+      text-align: center;
+    }
+
+  #gantt div.user-row {
+    float: left;
+  }
+
+  #gantt div.user-row {
+    border-left: 1px solid #838b8b;
+  }
+
+  #gantt div.user-row div.day {
+    border-bottom: 1px solid #838b8b;
+    border-right: 1px solid #838b8b;
+    float: left;
+    height: 2.5em;
+    padding: 0;
+    margin: 0;
+  }
+
+  #gantt div.user-row div.user-name {
+    width: 85px;
+  }
+
+  #gantt div.user-row div.number {
+    text-align: center;
+    width: 20px;
+  }
+
+  #gantt div.user-row div.existing {
+    background-color: #f00;
+  }
+
+  #gantt div.user-row div.current {
+    background-color: #0f0;
+  }
+
+/* sidebar */
+
+#gantt-sidebar {
+  border-left: 1px solid #838b8b;
+  float: right;
+  width: 200px;
+}
+
+  #gantt-sidebar div.gantt-sidebar-content {
+    margin: 0 0.5em;
+  }
+
+  #gantt-sidebar div.gantt-sidebar-content h2 {
+    border-bottom: 1px solid #838b8b;
+    color: #000;
+    font-size: 120%;
+    text-indent: 0;
+  }
+
+/* other */
+
+#content form {
+  margin: 0;
+}
+
+label {
+  float: none;
+}
+
+a.change-month:link, a.change-month:visited, a.change-month:active {
+  color: #00f;
+}

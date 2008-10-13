@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   after_create :create_roles
 
+  def fullname
+    "#{self[:firstname]} #{self[:surname]}"    
+  end
+
   # Authenticates a user by their username and unencrypted password.  Returns the user or nil.
   def self.authenticate(username, password)
     u = find(:first, :conditions => {:username => username}) # need to get the salt
@@ -69,6 +73,10 @@ class User < ActiveRecord::Base
     else
       roles.delete(admin_role)
     end
+  end
+
+  def self.get_department_users(department)
+    find(:all, :conditions => {:department_id => department.id}, :include => [:holidays])
   end
 
   protected
