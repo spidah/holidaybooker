@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    redirect_to(home_path) and return if @current_user
     @user = User.new
   end
 
@@ -10,16 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if @current_user
-      if @current_user.has_role?('admin')
-        redirect_to(admin_users_path)
-      else
-        redirect_to(holidays_path)
-      end
-
-      return
-    end
-
+    redirect_to(home_path) and return if @current_user
     password_authentication(params[:username], params[:password])
   end
 
@@ -50,11 +42,7 @@ class SessionsController < ApplicationController
     end
 
     def successful_login
-      if @current_user.has_role?('admin')
-        redirect_back_or_default(admin_users_path)
-      else
-        redirect_back_or_default(holidays_path)
-      end
+      redirect_back_or_default(home_path)
     end
 
     def failed_login(message)
