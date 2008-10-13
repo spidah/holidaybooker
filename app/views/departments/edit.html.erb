@@ -7,6 +7,13 @@
     <div class="gantt-sidebar-content">
       <h2>Confirm Holiday</h2>
       <p>Reason: <%= @holiday.reason -%></p>
+      <% form_for(@holiday, :url => department_path(@holiday)) do |f| -%>
+      <div><%= f.radio_button(:rejected, 'f') -%> <label for="holiday_rejected_f">confirm</label></div>
+      <div><%= f.radio_button(:rejected, 't') -%> <label for="holiday_rejected_t">reject</label></div>
+      <div class="holiday-rejected-reason"><label for="holiday_rejected_reason">Why?</label></div>
+      <div class="holiday-rejected-reason"><%= f.text_area(:rejected_reason, :cols => 20, :rows => 5) -%></div>
+      <div><%= f.submit('Submit', :class => 'holiday-submit') -%></div>
+      <% end -%>
     </div>
   </div>
 <% end -%>

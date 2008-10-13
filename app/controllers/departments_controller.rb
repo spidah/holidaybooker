@@ -16,6 +16,23 @@ class DepartmentsController < ApplicationController
     populate_vars(@holiday.start_date)
   end
 
+  def update
+    @holiday = Holiday.find(params[:id])
+
+    if params[:holiday][:rejected] == 't'
+      @holiday.rejected = true
+      @holiday.rejected_reason = params[:holiday][:rejected_reason]
+    else
+      @holiday.confirmed = true
+    end
+
+    @holiday.save!
+    redirect_to(departments_path)
+  rescue
+    flash[:error] = @holiday.errors
+    redirect_to(departments_path)
+  end
+
   def change_month
     respond_to do |wants|
       wants.js do
