@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081009214632) do
+ActiveRecord::Schema.define(:version => 20081013163853) do
 
   create_table "departments", :force => true do |t|
     t.string "name"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(:version => 20081009214632) do
     t.date     "end_date"
     t.integer  "total_days"
     t.text     "reason"
-    t.boolean  "confirmed",  :default => false
+    t.boolean  "confirmed",       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "rejected",        :default => false
+    t.text     "rejected_reason"
   end
 
   create_table "roles", :force => true do |t|
