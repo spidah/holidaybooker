@@ -271,3 +271,7 @@ table {
 p.holidays-status {
   text-indent: 2em;
 }
+
+input.holiday-submit {
+  margin-top: 1em;
+}
