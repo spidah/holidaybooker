@@ -51,13 +51,11 @@ class DepartmentsController < ApplicationController
     def populate_vars(startdate = current_date)
       @today = current_date
       @date = session[:calendar_date] || startdate
-      #@weekday = convert_week_day_number(@date.wday)
       @monthstart = @date.beginning_of_month
       @monthdays = @date.end_of_month.day
       @monthend = @date.end_of_month
       @prevmonth = @date - 1.month
       @nextmonth = @date + 1.month
       @dayindex = 1
-      #@weekindex = 1
     end
 end
