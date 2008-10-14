@@ -5,15 +5,18 @@ class DepartmentsController < ApplicationController
     get_department_users
   end
 
+  def show
+    include_extra_stylesheet('gantt')
+    include_extra_javascript('gantt')
+    session[:calendar_date] = nil
+    get_holiday
+  end
+
   def edit
-    if action_name == 'edit'
-      include_extra_stylesheet('gantt')
-      include_extra_javascript('gantt')
-      session[:calendar_date] = nil
-    end
-    @holiday = Holiday.find(params[:id])
-    get_department_users
-    populate_vars(@holiday.start_date)
+    include_extra_stylesheet('gantt')
+    include_extra_javascript('gantt')
+    session[:calendar_date] = nil
+    get_holiday
   end
 
   def update
@@ -37,13 +40,19 @@ class DepartmentsController < ApplicationController
     respond_to do |wants|
       wants.js do
         session[:calendar_date] = Date.parse(params[:date]) rescue current_date
-        edit
+        get_holiday
         render(:partial => 'department_gantt', :layout => false)
       end
     end
   end
 
   protected
+    def get_holiday
+      @holiday = Holiday.find(params[:id])
+      get_department_users
+      populate_vars(@holiday.start_date)
+    end
+
     def get_department_users
       @users = User.get_department_users(@current_user.department)
     end

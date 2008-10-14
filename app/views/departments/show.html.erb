@@ -1,0 +1,10 @@
+<% set_title('Department Holidays') -%>
+<% div_block do -%>
+<%= render :partial => 'department_gantt' -%>
+  <div id="gantt-sidebar">
+    <div class="gantt-sidebar-content">
+      <h2>Confirmed Holiday</h2>
+      <p>Reason: <%= @holiday.reason -%></p>
+    </div>
+  </div>
+<% end -%>
