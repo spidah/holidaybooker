@@ -3,15 +3,27 @@
 <% div_block do -%>
   <% for user in @users do -%>
   <p><%= user.fullname -%></p>
-  <% if user.holidays.unconfirmed.size > 0 -%>
-    <% for holiday in user.holidays.unconfirmed do -%>
+    <% if user.holidays.unconfirmed.size == 0 && user.holidays.confirmed.size == 0 -%>
+  <p class="holidays-status">No holidays entered.</p>
+    <% else -%>
+      <% if user.holidays.unconfirmed.size > 0 -%>
+        <% for holiday in user.holidays.unconfirmed do -%>
   <p class="holidays-status">
+    PENDING: 
     <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
     <%= link_to('show', edit_department_path(holiday)) -%>
   </p>
+        <% end -%>
+      <% end -%>
+      <% if user.holidays.confirmed.size > 0 -%>
+        <% for holiday in user.holidays.confirmed do -%>
+  <p class="holidays-status">
+    CONFIRMED: 
+    <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
+    <%= link_to('show', department_path(holiday)) -%>
+  </p>
+        <% end -%>
+      <% end -%>
     <% end -%>
-  <% else -%>
-  <p class="holidays-status">No pending holidays.</p>
-  <% end -%>
   <% end -%>
 <% end -%>
