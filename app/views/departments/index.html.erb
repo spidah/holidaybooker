@@ -2,8 +2,8 @@
 
 <% div_block do -%>
   <% for user in @users do
-     unconfirmed = user.holidays.unconfirmed.after_date(@current_date)
-     confirmed = user.holidays.confirmed.after_date(@current_date)
+     unconfirmed = user.holidays.unconfirmed.after(@current_date)
+     confirmed = user.holidays.confirmed.after(@current_date)
   -%>
   <p><%= user.fullname -%></p>
     <% if unconfirmed.size == 0 && confirmed.size == 0 -%>
