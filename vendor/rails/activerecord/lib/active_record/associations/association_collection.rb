@@ -320,6 +320,10 @@ module ActiveRecord
         exists?(record)
       end
 
+      def proxy_respond_to?(method, include_private = false)
+        super || @reflection.klass.respond_to?(method, include_private)
+      end
+
       protected
         def construct_find_options!(options)
         end

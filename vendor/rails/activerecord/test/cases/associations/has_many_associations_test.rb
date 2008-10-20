@@ -1080,5 +1080,15 @@ class HasManyAssociationsTest < ActiveRecord::TestCase
     end
   end
 
+  def test_sending_new_to_association_proxy_should_have_same_effect_as_calling_new
+    client_association = companies(:first_firm).clients
+    assert_equal client_association.new.attributes, client_association.send(:new).attributes
+  end
+
+  def test_respond_to_private_class_methods
+    client_association = companies(:first_firm).clients
+    assert !client_association.respond_to?(:private_method)
+    assert client_association.respond_to?(:private_method, true)
+  end
 end
 
