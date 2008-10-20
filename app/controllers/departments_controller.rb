@@ -3,6 +3,7 @@ class DepartmentsController < ApplicationController
 
   def index
     get_department_users
+    @current_date = current_date
   end
 
   def show
