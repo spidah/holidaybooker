@@ -9,6 +9,12 @@ class Holiday < ActiveRecord::Base
     :conditions => ['(start_date >= :start AND start_date <= :end) OR (end_date >= :start AND end_date <= :end)',
     {:start => monthstart, :end => monthend}]
   }}
+  named_scope :before_date, lambda { |date|
+    { :conditions => [ 'end_date <= :date', { :date => date } ] }
+  }
+  named_scope :after_date, lambda { |date|
+    { :conditions => [ 'start_date >= :date', { :date => date } ] }
+  }
 
   validates_presence_of :start_date, :message => 'Please select a start date.'
   validates_presence_of :end_date, :message => 'Please select an end date.'
