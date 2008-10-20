@@ -78,11 +78,11 @@ class HolidaysController < ApplicationController
   end
 
   def confirmed
-    @confirmed = @current_user.holidays.confirmed
+    @confirmed = @current_user.holidays.confirmed.after(current_date)
   end
 
   def unconfirmed
-    @unconfirmed = @current_user.holidays.unconfirmed
+    @unconfirmed = @current_user.holidays.unconfirmed.after(current_date)
   end
 
   protected
