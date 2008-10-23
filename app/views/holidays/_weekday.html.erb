@@ -1,5 +1,6 @@
-<div class="day<%= " #{extra}" if defined?(extra) && !extra.blank? -%><%= ' today' if @today == date -%>" title="<%= date -%>">
+<% @day = replace_day(@date, @dayindex) -%>
+<div class="day<%= " last" if @weekindex == 7 -%><%= ' today' if @today == @day -%>" title="<%= @day -%>">
   <div class="data">
-    <span class="number"><%= day -%></span>
+    <span class="number"><%= @dayindex -%></span>
   </div>
 </div>

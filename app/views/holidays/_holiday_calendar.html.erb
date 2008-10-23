@@ -10,29 +10,29 @@
 <% end -%>
 <% if @monthstart > 1 -%>
       <div class="week">
-<% 1.upto(@monthstart - 1) do |day| -%>
-        <%= render :partial => 'blankday' -%>
-<% @weekindex += 1 -%>
-<% end -%>
-<% @weekindex.upto(7) do |day| -%>
-        <%= render :partial => 'weekday', :locals => {:day => @dayindex, :date => replace_day(@date, @dayindex), :extra => @weekindex == 7 ? 'last' : ''} -%>
-<% @dayindex += 1 -%>
-<% @weekindex += 1 -%>
-<% end -%>
+  <% 1.upto(@monthstart - 1) do |day| -%>
+        <%= render(:partial => 'blankday') -%>
+    <% @weekindex += 1 -%>
+  <% end -%>
+  <% @weekindex.upto(7) do |day| -%>
+        <%= render(:partial => 'weekday') -%>
+    <% @dayindex += 1 -%>
+    <% @weekindex += 1 -%>
+  <% end -%>
       </div>
 <% end -%>
 <% while @dayindex <= @monthdays do -%>
       <div class="week">
-<% @weekindex = 1 -%>
-<% 1.upto(7) do |dayi| -%>
-<% if @dayindex <= @monthdays -%>
-        <%= render :partial => 'weekday', :locals => {:day => @dayindex, :date => replace_day(@date, @dayindex), :extra => @weekindex == 7 ? 'last' : ''} -%>
-<% else -%>
-        <%= render :partial => 'blankday', :locals => {:extra => @weekindex == 7 ? 'last' : ''} -%>
-<% end -%>
-<% @dayindex += 1 -%>
-<% @weekindex += 1 -%>
-<% end -%>
+  <% @weekindex = 1 -%>
+  <% 1.upto(7) do |day| -%>
+    <% if @dayindex <= @monthdays -%>
+        <%= render(:partial => 'weekday') -%>
+    <% else -%>
+        <%= render(:partial => 'blankday') -%>
+    <% end -%>
+    <% @dayindex += 1 -%>
+    <% @weekindex += 1 -%>
+  <% end -%>
       </div>
 <% end -%>
       </div>
