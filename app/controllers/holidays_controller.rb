@@ -1,11 +1,10 @@
 class HolidaysController < ApplicationController
-  needs_role :user, :actions => [:index, :new, :create, :show, :edit, :update, :destroy, :confirmed, :unconfirmed, :previous, :change_month]
+  needs_role :user, :actions => [:index, :new, :create, :show, :edit, :update, :destroy, :confirmed, :unconfirmed, :taken, :change_month]
 
   def index
     date = current_date
     @confirmed = @current_user.holidays.confirmed.after(date).size
     @unconfirmed = @current_user.holidays.unconfirmed.after(date).size
-    @previous = @current_user.holidays.before(date).size
   end
 
   def show
@@ -85,8 +84,8 @@ class HolidaysController < ApplicationController
     @unconfirmed = @current_user.holidays.unconfirmed.after(current_date)
   end
 
-  def previous
-    @previous = @current_user.holidays.before(current_date)
+  def taken
+    @taken = @current_user.holidays.before(current_date)
   end
 
   protected

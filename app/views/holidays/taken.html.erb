@@ -1,14 +1,14 @@
-<% set_title('Previous Holidays') -%>
+<% set_title('Taken Holidays') -%>
 <% div_block do -%>
-<% if @previous.size > 0 -%>
-  <p>You have <%= pluralize(@previous.size, 'previous holiday') -%>:</p>
-<% for holiday in @previous do -%>
+<% if @taken.size > 0 -%>
+  <p>You have taken <%= pluralize(@taken.size, 'holiday') -%>:</p>
+<% for holiday in @taken do -%>
   <p class="holidays-status">
     <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
     <%= link_to('show', holiday_path(holiday)) -%>
   </p>
 <% end -%>
 <% else -%>
-  <p>You do not have any previous holidays.</p>
+  <p>You have not taken any holidays yet.</p>
 <% end -%>
 <% end -%>

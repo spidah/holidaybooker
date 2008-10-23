@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource          :session
-  map.resources         :holidays,                :collection => { :change_month => :get, :confirmed => :get, :unconfirmed => :get, :previous => :get }
+  map.resources         :holidays,                :collection => { :change_month => :get, :confirmed => :get, :unconfirmed => :get, :taken => :get }
   map.resources         :departments,             :member => { :change_month => :get }
 
   map.namespace(:admin) do |admin|
