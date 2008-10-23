@@ -97,6 +97,8 @@ $(document).ready(function() {
 
   var setDayClicks = function() {
     $('div.day').click(function() {
+      if ($(this).hasClass('disabled'))
+        return;
       var date = $(this).attr('title');
       if (date) {
         setDateBoundary(date);

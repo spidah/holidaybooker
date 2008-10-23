@@ -35,6 +35,10 @@
       background-color: #c1cdcd;
     }
 
+    #calendar div.days div.week div.disabled {
+      background-color: #d2dbdb;
+    }
+
     #calendar div.days div.week div.data {
       height: 89px;
       text-align: left;

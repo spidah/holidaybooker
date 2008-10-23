@@ -1,5 +1,5 @@
 <% @day = replace_day(@date, @dayindex) -%>
-<div class="day<%= " last" if @weekindex == 7 -%><%= ' today' if @today == @day -%>" title="<%= @day -%>">
+<div class="day<%= ' last' if @weekindex == 7 -%><%= ' disabled' if @today > @day -%><%= ' today' if @today == @day -%>" title="<%= @day -%>">
   <div class="data">
     <span class="number"><%= @dayindex -%></span>
   </div>
