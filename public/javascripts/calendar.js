@@ -184,7 +184,7 @@ $(document).ready(function() {
   };
 
   var calendarEnabled = function() {
-    return !($('div#calendar').hasClass('disabled'));
+    return !$('div#calendar').hasClass('disabled');
   };
 
   checkExistingDates();
