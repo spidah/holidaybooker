@@ -13,7 +13,7 @@ module DepartmentsHelper
 
   def colour_days(holiday, days, css_class = 'existing')
     start_date = holiday.start_date
-    while start_date < holiday.end_date do
+    while start_date <= holiday.end_date do
       days[start_date.day] = {:class => css_class, :reason => holiday.reason}
       start_date += 1
     end
