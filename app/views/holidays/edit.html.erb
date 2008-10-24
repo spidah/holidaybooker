@@ -11,7 +11,7 @@
       <p>Please reselect the start date and end date, or edit the reason to update your holiday.</p>
       <p>Start date: <span class="start-date"></span></p>
       <p>End date: <span class="end-date"></span></p>
-      <p class="clear-calendar"><%= link_to('Clear selected calendar dates', edit_holiday_path(@holiday)) -%></p>
+      <p class="reset-calendar"><%= link_to('Reset calendar', edit_holiday_path(@holiday)) -%></p>
       <% form_for(@holiday) do |f| -%>
       <div><label for="holiday_reason">Reason:</label></div>
       <div><%= f.text_area(:reason, :cols => 30, :rows => 5) -%></div>

@@ -1,5 +1,7 @@
 $(document).ready(function() {
   var dateField = 0;
+  var originalStartDate = null;
+  var originalEndDate = null;
   var startDate = null;
   var endDate = null;
 
@@ -91,7 +93,7 @@ $(document).ready(function() {
     checkDates();
     colourDays();
     outputDates();
-    showClearLink();
+    showResetLink();
     enableFormSubmit();
   };
 
@@ -126,12 +128,12 @@ $(document).ready(function() {
     });
   };
 
-  var hideClearLink = function() {
-    $('p.clear-calendar').hide();
+  var hideResetLink = function() {
+    $('p.reset-calendar').hide();
   };
 
-  var showClearLink = function() {
-    $('p.clear-calendar').show();
+  var showResetLink = function() {
+    $('p.reset-calendar').show();
   };
 
   var disableFormSubmit = function() {
@@ -142,14 +144,17 @@ $(document).ready(function() {
     $('input.holiday-submit').removeAttr('disabled');
   };
 
-  var setupClearLink = function() {
-    hideClearLink();
-    $('p.clear-calendar > a').click(function() {
-      startDate = null;
-      endDate = null;
+  var setupResetLink = function() {
+    hideResetLink();
+    $('p.reset-calendar > a').click(function() {
+      startDate = originalStartDate;
+      endDate = originalEndDate;
       clearDays();
+      if (startDate) {
+        colourDays();
+      }
       outputDates();
-      hideClearLink();
+      hideResetLink();
       disableFormSubmit();
       return false;
     });
@@ -168,6 +173,10 @@ $(document).ready(function() {
       strToDate(sd, startDate);
       endDate = new Date();
       strToDate(ed, endDate);
+      originalStartDate = new Date();
+      strToDate(sd, originalStartDate);
+      originalEndDate = new Date();
+      strToDate(ed, originalEndDate);
     }
   };
 
@@ -182,9 +191,9 @@ $(document).ready(function() {
   }
   if (calendarEnabled()) {
     setDayClicks();
-    setupClearLink();
+    setupResetLink();
   } else {
-    hideClearLink();
+    hideResetLink();
   }
   setMonthClicks();
   disableFormSubmit();
