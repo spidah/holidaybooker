@@ -149,6 +149,7 @@ $(document).ready(function() {
     $('p.reset-calendar > a').click(function() {
       startDate = originalStartDate;
       endDate = originalEndDate;
+      dateField = 0;
       clearDays();
       if (startDate) {
         colourDays();
@@ -161,6 +162,8 @@ $(document).ready(function() {
   };
 
   var checkExistingDates = function() {
+    var sd = null;
+    var ed = null;
     if ($('input#holiday_start_date').length == 1) {
       sd = $('input#holiday_start_date').attr('value');
       ed = $('input#holiday_end_date').attr('value');
