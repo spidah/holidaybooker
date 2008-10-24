@@ -61,11 +61,11 @@
   }
 
   #gantt div.user-row div.existing {
-    background-color: #f00;
+    background-color: #0f0;
   }
 
   #gantt div.user-row div.current {
-    background-color: #0f0;
+    background-color: #f00;
   }
 
 /* sidebar */
