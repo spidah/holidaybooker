@@ -100,9 +100,22 @@ class HolidaysController < ApplicationController
       @nextmonth = @date + 1.month
       @dayindex = 1
       @weekindex = 1
+      @confirmed = confirm_days(@current_user.holidays.confirmed.in_month(@date.beginning_of_month, @date.end_of_month))
     end
 
     def convert_week_day_number(wday)
       wday > 0 ? wday : 7
+    end
+
+    def confirm_days(holidays)
+      days = {}
+      holidays.each { |holiday|
+        start_date = holiday.start_date
+        while start_date <= holiday.end_date do
+          days[start_date.day] = {:class => 'confirmed', :reason => holiday.reason}
+          start_date += 1
+        end
+      }
+      days
     end
 end

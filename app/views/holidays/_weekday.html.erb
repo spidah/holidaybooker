@@ -1,6 +1,9 @@
-<% @day = replace_day(@date, @dayindex) -%>
-<div class="day<%= ' last' if @weekindex == 7 -%><%= ' disabled' if @today > @day -%><%= ' today' if @today == @day -%>" title="<%= @day -%>">
+<% day = replace_day(@date, @dayindex) -%>
+<div class="day<%= ' last' if @weekindex == 7 -%><%= ' disabled' if @today > day -%><%= " #{@confirmed[day.day][:class]}" if @confirmed[day.day] -%><%= ' today' if @today == day -%>" title="<%= day -%>">
   <div class="data">
     <span class="number"><%= @dayindex -%></span>
+<% if @confirmed[day.day] -%>
+    <span class="reason"><%= @confirmed[day.day][:reason] -%></span>
+<% end -%>
   </div>
 </div>
