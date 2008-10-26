@@ -54,6 +54,10 @@ $(document).ready(function() {
   };
 
   var colourDays = function() {
+    if (!startDate) {
+      return;
+    }
+
     var index = new Date();
     index.setDate(1);
     index.setMonth(startDate.getMonth());
