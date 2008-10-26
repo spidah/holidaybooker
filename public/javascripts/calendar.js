@@ -28,6 +28,13 @@ $(document).ready(function() {
     blankTime(date);
   };
 
+  var getDayDiv = function(date) {
+    if (typeof date == 'object') {
+      date = dateToStr(date);
+    }
+    return $('div[title=' + date + ']');
+  };
+
   var checkDates = function() {
     if (startDate > endDate) {
       var tmp = new Date();
@@ -53,7 +60,7 @@ $(document).ready(function() {
 
     var elem;
     while (true) {
-      elem = $('div[title=' + dateToStr(index) + ']');
+      elem = getDayDiv(index);
       if (elem.length == 1 && (index >= startDate) && (index <= endDate)) {
         elem.addClass('selected');
       } else {
@@ -77,6 +84,22 @@ $(document).ready(function() {
     $('input#holiday_end_date').attr('value', endDate ? dateToStr(endDate) : '');
   };
 
+  var checkForConfirmed = function() {
+    var index = new Date();
+    copyDates(index, startDate);
+
+    var elem;
+    while (index <= endDate) {
+      elem = getDayDiv(index);
+
+      if (elem.hasClass('confirmed')) {
+        return true;
+      }
+      index.setDate(index.getDate() + 1);
+    }
+    return false;
+  };
+
   var setDateBoundary = function(date) {
     var dstring = date.toString();
     if (dateField == 0) {
@@ -91,6 +114,11 @@ $(document).ready(function() {
       dateField = 0;
     }
     checkDates();
+    if (checkForConfirmed()) {
+      dateField = 1;
+      strToDate(dstring, startDate);
+      strToDate(dstring, endDate);
+    }
     colourDays();
     outputDates();
     showResetLink();
@@ -99,7 +127,7 @@ $(document).ready(function() {
 
   var setDayClicks = function() {
     $('div.day').click(function() {
-      if ($(this).hasClass('disabled'))
+      if ($(this).hasClass('disabled') || $(this).hasClass('confirmed'))
         return;
       var date = $(this).attr('title');
       if (date) {
