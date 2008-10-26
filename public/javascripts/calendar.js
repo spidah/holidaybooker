@@ -184,9 +184,7 @@ $(document).ready(function() {
       endDate = originalEndDate;
       dateField = 0;
       clearDays();
-      if (startDate) {
-        colourDays();
-      }
+      colourDays();
       outputDates();
       hideResetLink();
       disableFormSubmit();
@@ -217,16 +215,16 @@ $(document).ready(function() {
   };
 
   checkExistingDates();
-  if (startDate && endDate) {
-    outputDates();
-    colourDays();
-  }
+  outputDates();
+  colourDays();
+
   if (calendarEnabled()) {
     setDayClicks();
     setupResetLink();
   } else {
     hideResetLink();
   }
+
   setMonthClicks();
   disableFormSubmit();
 });
