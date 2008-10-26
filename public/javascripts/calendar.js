@@ -69,7 +69,7 @@ $(document).ready(function() {
         elem.removeClass('selected');
       }
       index.setDate(index.getDate() + 1);
-      if (index.getMonth() > endDate.getMonth()) {
+      if (index.getMonth() > endDate.getMonth() || index.getYear() > endDate.getYear()) {
         break;
       }
     }
