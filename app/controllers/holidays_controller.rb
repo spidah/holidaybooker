@@ -100,7 +100,7 @@ class HolidaysController < ApplicationController
       @nextmonth = @date + 1.month
       @dayindex = 1
       @weekindex = 1
-      @confirmed = confirm_days(@current_user.holidays.confirmed.in_month(@date.beginning_of_month, @date.end_of_month))
+      @confirmed = confirm_days(@current_user.holidays.confirmed.in_month(@date.beginning_of_month, @date.end_of_month).after(@today))
     end
 
     def convert_week_day_number(wday)
