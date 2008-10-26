@@ -40,13 +40,13 @@ $(document).ready(function() {
   var checkDates = function() {
     if (startDate > endDate) {
       var tmp = new Date();
-      copyDates(tmp, startDate);
-      copyDates(startDate, endDate);
-      copyDates(endDate, tmp);
+      copyDate(tmp, startDate);
+      copyDate(startDate, endDate);
+      copyDate(endDate, tmp);
     }
   };
 
-  var copyDates = function(to, from) {
+  var copyDate = function(to, from) {
     to.setDate(from.getDate());
     to.setMonth(from.getMonth());
     to.setFullYear(from.getFullYear());
@@ -88,7 +88,7 @@ $(document).ready(function() {
 
   var checkForConfirmed = function() {
     var index = new Date();
-    copyDates(index, startDate);
+    copyDate(index, startDate);
 
     var elem;
     while (index <= endDate) {
@@ -105,20 +105,20 @@ $(document).ready(function() {
   var setDateBoundary = function(date) {
     if (dateField == 0) {
       startDate = new Date();
-      copyDates(startDate, date);
+      copyDate(startDate, date);
       endDate = new Date();
-      copyDates(endDate, startDate);
+      copyDate(endDate, startDate);
       dateField = 1;
     } else {
       endDate = new Date();
-      copyDates(endDate, date);
+      copyDate(endDate, date);
       dateField = 0;
     }
     checkDates();
     if (checkForConfirmed()) {
       dateField = 1;
-      copyDates(startDate, date);
-      copyDates(endDate, date);
+      copyDate(startDate, date);
+      copyDate(endDate, date);
     }
     colourDays();
     outputDates();
