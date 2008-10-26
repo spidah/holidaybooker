@@ -59,10 +59,8 @@ $(document).ready(function() {
     }
 
     var index = new Date();
+    copyDate(index, startDate);
     index.setDate(1);
-    index.setMonth(startDate.getMonth());
-    index.setFullYear(startDate.getFullYear());
-    blankTime(index);
 
     var elem;
     while (true) {
