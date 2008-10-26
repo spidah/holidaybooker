@@ -20,12 +20,14 @@ $(document).ready(function() {
     return date.getYear().toString() + '-' + (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0' : '') + date.getDate().toString();
   };
 
-  var strToDate = function(dateStr, date) {
+  var strToDate = function(dateStr) {
     arr = dateStr.split('-');
+    date = new Date();
     date.setDate(new Number(arr[2]));
     date.setMonth(new Number(arr[1]) - 1);
     date.setFullYear(new Number(arr[0]));
     blankTime(date);
+    return date;
   };
 
   var getDayDiv = function(date) {
@@ -101,23 +103,22 @@ $(document).ready(function() {
   };
 
   var setDateBoundary = function(date) {
-    var dstring = date.toString();
     if (dateField == 0) {
       startDate = new Date();
-      strToDate(dstring, startDate);
+      copyDates(startDate, date);
       endDate = new Date();
       copyDates(endDate, startDate);
       dateField = 1;
     } else {
       endDate = new Date();
-      strToDate(dstring, endDate);
+      copyDates(endDate, date);
       dateField = 0;
     }
     checkDates();
     if (checkForConfirmed()) {
       dateField = 1;
-      strToDate(dstring, startDate);
-      strToDate(dstring, endDate);
+      copyDates(startDate, date);
+      copyDates(endDate, date);
     }
     colourDays();
     outputDates();
@@ -131,7 +132,7 @@ $(document).ready(function() {
         return;
       var date = $(this).attr('title');
       if (date) {
-        setDateBoundary(date);
+        setDateBoundary(strToDate(date));
       }
     });
   };
@@ -200,14 +201,10 @@ $(document).ready(function() {
       ed = $('span.end-date').text();
     }
     if (sd && ed) {
-      startDate = new Date();
-      strToDate(sd, startDate);
-      endDate = new Date();
-      strToDate(ed, endDate);
-      originalStartDate = new Date();
-      strToDate(sd, originalStartDate);
-      originalEndDate = new Date();
-      strToDate(ed, originalEndDate);
+      startDate = strToDate(sd);
+      endDate = strToDate(ed);
+      originalStartDate = strToDate(sd);
+      originalEndDate = strToDate(ed);
     }
   };
 
