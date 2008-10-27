@@ -6,6 +6,9 @@
   <div id="gantt-sidebar">
     <div class="gantt-sidebar-content">
       <h2>Confirm Holiday</h2>
+      <p>Start: <%= format_date(@holiday.start_date) -%></p>
+      <p>End: <%= format_date(@holiday.end_date) -%></p>
+      <p>Total days: <%= @holiday.total_days -%></p>
       <p>Reason: <%= @holiday.reason -%></p>
       <% form_for(@holiday, :url => department_path(@holiday)) do |f| -%>
       <div><%= f.radio_button(:rejected, 'f') -%> <label for="holiday_rejected_f">confirm</label></div>

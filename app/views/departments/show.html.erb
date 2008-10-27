@@ -4,6 +4,9 @@
   <div id="gantt-sidebar">
     <div class="gantt-sidebar-content">
       <h2>Confirmed Holiday</h2>
+      <p>Start: <%= format_date(@holiday.start_date) -%></p>
+      <p>End: <%= format_date(@holiday.end_date) -%></p>
+      <p>Total days: <%= @holiday.total_days -%></p>
       <p>Reason: <%= @holiday.reason -%></p>
     </div>
   </div>
