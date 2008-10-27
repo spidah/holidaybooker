@@ -4,6 +4,19 @@
       <div class="next-month"><%= link_month(@holiday, @nextmonth, "#{month_name(@nextmonth)} &gt;&gt;") -%></div>
       <div class="month"><%= month_name(@date) -%></div>
     </div>
+    <div class="user-row">
+      <div class="user-name day wday">&nbsp;</div>
+<%
+  date = @monthstart
+  daynames = %w(Su M Tu W Th F Sa)
+  while date <= @monthend do
+-%>
+      <div class="number day wday"><%= daynames[date.wday] -%></div>
+<%
+  date = date + 1.day
+  end
+-%>
+    </div>
 <% for user in @users do -%>
     <div class="user-row">
       <div class="user-name day"><%= user.surname -%>,<br /><%= user.firstname -%></div>

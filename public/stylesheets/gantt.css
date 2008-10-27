@@ -47,12 +47,17 @@
     border-right: 1px solid #838b8b;
     float: left;
     height: 2.5em;
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
 
   #gantt div.user-row div.user-name {
     width: 85px;
+  }
+
+  #gantt div.user-row div.wday {
+    font-size: 90%;
+    height: auto;
   }
 
   #gantt div.user-row div.number {
