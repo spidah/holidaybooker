@@ -60,6 +60,10 @@
     height: auto;
   }
 
+  #gantt div.user-row div.today {
+    background-color: #87ceeb;
+  }
+
   #gantt div.user-row div.number {
     text-align: center;
     width: 20px;

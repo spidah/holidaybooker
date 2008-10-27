@@ -5,9 +5,9 @@
   while day <= @monthend do
 -%>
 <% if days[day.day] -%>
-<div class="number day <%= days[day.day][:class] -%>" title="<%= days[day.day][:reason] -%>">
+<div class="number day<%= ' today' if @today == day -%><%= " #{days[day.day][:class]}" -%>" title="<%= days[day.day][:reason] -%>">
 <% else -%>
-<div class="number day">
+<div class="number day<%= ' today' if @today == day -%>">
 <% end -%>
 <%= day.day -%>
 </div>

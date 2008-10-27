@@ -11,7 +11,7 @@
   daynames = %w(Su M Tu W Th F Sa)
   while date <= @monthend do
 -%>
-      <div class="number day wday"><%= daynames[date.wday] -%></div>
+      <div class="number day wday<%= ' today' if @today == date -%>"><%= daynames[date.wday] -%></div>
 <%
   date = date + 1.day
   end
