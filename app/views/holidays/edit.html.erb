@@ -9,6 +9,7 @@
     <div class="calendar-sidebar-content">
       <h2>Edit Holiday</h2>
       <p>Please reselect the start date and end date, or edit the reason to update your holiday.</p>
+      <% if @holiday.rejected -%><p>Rejected for: <%= h(@holiday.rejected_reason) -%></p><% end -%>
       <p>Start date: <span class="start-date"></span></p>
       <p>End date: <span class="end-date"></span></p>
       <p class="reset-calendar"><%= link_to('Reset calendar', edit_holiday_path(@holiday)) -%></p>

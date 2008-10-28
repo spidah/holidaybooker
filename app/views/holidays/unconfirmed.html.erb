@@ -4,6 +4,7 @@
   <p>You have <%= pluralize(@unconfirmed.size, 'holiday') -%> awaiting confirmation:</p>
 <% for holiday in @unconfirmed do -%>
   <p class="holidays-status">
+    <% if holiday.rejected -%>(Rejected)<% end -%>
     <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
     <%= link_to('edit', edit_holiday_path(holiday)) -%>
     <%= link_to('delete', holiday_path(holiday), :method => :delete, :confirm => 'Are you sure you want to delete this holiday?') -%>
