@@ -5,6 +5,8 @@ class Holiday < ActiveRecord::Base
 
   named_scope :unconfirmed, :conditions => {:confirmed => false}
   named_scope :confirmed, :conditions => {:confirmed => true}
+  named_scope :pending, :conditions => {:rejected => false}
+  named_scope :rejected, :conditions => {:rejected => true}
   named_scope :in_month, lambda { |monthstart, monthend|
     { :conditions => [ '(start_date >= :start AND start_date <= :end) OR (end_date >= :start AND end_date <= :end)',
       { :start => monthstart, :end => monthend } ] }

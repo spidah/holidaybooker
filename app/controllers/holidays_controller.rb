@@ -4,7 +4,8 @@ class HolidaysController < ApplicationController
   def index
     date = current_date
     @confirmed = @current_user.holidays.confirmed.after(date).size
-    @unconfirmed = @current_user.holidays.unconfirmed.after(date).size
+    @unconfirmed = @current_user.holidays.unconfirmed.pending.after(date).size
+    @rejected = @current_user.holidays.unconfirmed.rejected.after(date).size
   end
 
   def show

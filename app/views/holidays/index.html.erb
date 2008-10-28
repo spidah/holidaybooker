@@ -1,9 +1,10 @@
 <% set_title('Submitted Holidays') -%>
 <% div_block do -%>
-<% if @confirmed > 0 || @unconfirmed > 0 -%>
+<% if @confirmed > 0 || @unconfirmed > 0 || @rejected > 0 -%>
   <p>You have:</p>
 <% if @confirmed > 0 -%><p class="holidays-status"><%= link_to_count(@confirmed, 'confirmed', 'holiday', confirmed_holidays_path) -%></p><% end -%>
 <% if @unconfirmed > 0 -%><p class="holidays-status"><%= link_to_count(@unconfirmed, 'unconfirmed', 'holiday', unconfirmed_holidays_path) -%></p><% end -%>
+<% if @rejected > 0 -%><p class="holidays-status"><%= link_to_count(@rejected, 'rejected', 'holiday', unconfirmed_holidays_path) -%></p><% end -%>
 <% else -%>
   <p>You currently have no submitted holidays.</p>
 <% end -%>
