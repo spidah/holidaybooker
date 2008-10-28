@@ -49,6 +49,8 @@ class HolidaysController < ApplicationController
   def update
     @holiday = @current_user.holidays.find(params[:id])
     params[:holiday].delete(:confirmed)
+    @holiday.rejected = false
+    @holiday.rejected_reason = nil
     @holiday.update_attributes(params[:holiday])
     redirect_to(unconfirmed_holidays_path)
   rescue
