@@ -45,7 +45,7 @@ namespace :db do
           passconf = ask('retype password: ') { |p| p.echo = '*' }
         end
         firstname = ask('firstname: ')
-        surname = ask('surrname: ')
+        surname = ask('surname: ')
         create_user(username, password, passconf, firstname, surname)
         puts "--- #{username} created"
 
