@@ -224,7 +224,9 @@ $(document).ready(function() {
   }
 
   setMonthClicks();
-  disableFormSubmit();
+  if (!startDate) {
+    disableFormSubmit();
+  }
 });
 
 jQuery.ajaxSetup({'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript");}});
