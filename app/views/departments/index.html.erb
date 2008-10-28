@@ -12,7 +12,7 @@
       <% if unconfirmed.size > 0 -%>
         <% for holiday in unconfirmed do -%>
   <p class="holidays-status">
-    PENDING: 
+    <% if holiday.rejected -%>REJECTED:<% else -%>PENDING:<% end -%>
     <%= format_date(holiday.start_date) -%> - <%= format_date(holiday.end_date) -%> (<%= holiday.total_days -%> working days)
     <%= link_to('show', edit_department_path(holiday)) -%>
   </p>
