@@ -10,11 +10,17 @@ namespace :db do
       do_admin = User.count == 0
 
       if do_admin
-        username = ask('admin username: ')
+        username = ''
+        while username.blank? do
+          username = ask('admin username: ')
+        end
         password = '1'
         passconf = '2'
         while password != passconf do
-          password = ask('admin password: ') { |p| p.echo = '*' }
+          password = ''
+          while password.blank? do
+            password = ask('admin password: ') { |p| p.echo = '*' }
+          end
           passconf = ask('retype password: ') { |p| p.echo = '*' }
         end
       end
@@ -37,15 +43,27 @@ namespace :db do
     task :add_user => :environment do
       answer = true
       while answer do
-        username = ask('username: ')
+        username = ''
+        while username.blank? do
+          username = ask('username: ')
+        end
         password = '1'
         passconf = '2'
         while password != passconf do
-          password = ask('password: ') { |p| p.echo = '*' }
+          password = ''
+          while password.blank? do
+            password = ask('password: ') { |p| p.echo = '*' }
+          end
           passconf = ask('retype password: ') { |p| p.echo = '*' }
         end
-        firstname = ask('firstname: ')
-        surname = ask('surname: ')
+        firstname = ''
+        while firstname.blank? do
+          firstname = ask('firstname: ')
+        end
+        surname = ''
+        while surname.blank? do
+          surname = ask('surname: ')
+        end
         create_user(username, password, passconf, firstname, surname)
         puts "--- #{username} created"
 
