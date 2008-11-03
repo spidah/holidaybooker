@@ -10,18 +10,12 @@ namespace :db do
       do_admin = User.count == 0
 
       if do_admin
-        username = ''
-        while username.blank? do
-          username = ask('admin username: ')
-        end
+        username = get_answer('admin username: ')
         password = '1'
         passconf = '2'
         while password != passconf do
-          password = ''
-          while password.blank? do
-            password = ask('admin password: ') { |p| p.echo = '*' }
-          end
-          passconf = ask('retype password: ') { |p| p.echo = '*' }
+          password = get_answer('admin password: ', true)
+          passconf = get_answer('retype password: ', true, true)
         end
       end
 
@@ -43,27 +37,15 @@ namespace :db do
     task :add_user => :environment do
       answer = true
       while answer do
-        username = ''
-        while username.blank? do
-          username = ask('username: ')
-        end
+        username = get_answer('username: ')
         password = '1'
         passconf = '2'
         while password != passconf do
-          password = ''
-          while password.blank? do
-            password = ask('password: ') { |p| p.echo = '*' }
-          end
-          passconf = ask('retype password: ') { |p| p.echo = '*' }
+          password = get_answer('password: ', true)
+          passconf = get_answer('retype password: ', true, true)
         end
-        firstname = ''
-        while firstname.blank? do
-          firstname = ask('firstname: ')
-        end
-        surname = ''
-        while surname.blank? do
-          surname = ask('surname: ')
-        end
+        firstname = get_answer('firstname: ')
+        surname = get_answer('surname: ')
         create_user(username, password, passconf, firstname, surname)
         puts "--- #{username} created"
 
@@ -91,4 +73,12 @@ private
       Role.create(:name => role)
     }
     puts "--- Finished adding roles"
+  end
+
+  def get_answer(question, password = false, allow_blank = false)
+    answer = ask(question) { |p| p.echo = '*' if password }
+    while !allow_blank && answer.blank? do
+      answer = ask(question) { |p| p.echo = '*' if password }
+    end
+    answer
   end
