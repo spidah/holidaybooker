@@ -19,10 +19,8 @@ class SessionsController < ApplicationController
     if request.post?
       user = User.new
       user.username = params[:username]
-      user.password = params[:password]
-      user.password_confirmation = params[:password_confirmation]
-      user.firstname = params[:firstname]
-      user.surname = params[:surname]
+      user.attributes = params
+
       if user.save
         password_authentication(params[:username], params[:password])
       else
