@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :holidays, :order => 'start_date'
 
   attr_accessor :password
-  attr_accessible :password, :firstname, :surname
+  attr_accessible :password, :password_confirmation, :firstname, :surname
 
   validates_presence_of :username, :message => 'You need to enter a username.'
   validates_format_of :username, :with => /\A[a-z0-9\._-]+\Z/i,
