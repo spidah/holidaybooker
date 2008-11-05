@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   attr_accessible :password, :password_confirmation, :firstname, :surname
 
   validates_presence_of :username, :message => 'You need to enter a username.'
-  validates_format_of :username, :with => /\A[a-z0-9\._-]+\Z/i,
+  validates_format_of :username, :with => /\A[a-z0-9\._-]+\Z/i, :allow_nil => true,
     :message => "Please pick a username using the following characters only: 'a'-'z', '0'-'9', '.', '_' and '-'."
   validates_uniqueness_of :username, :allow_nil => true, :case_sensitive => false,
     :message => 'That username is already taken. Please select another one.'
