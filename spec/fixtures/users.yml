@@ -1,0 +1,59 @@
+ned:
+  username: ned.parker
+  firstname: Ned
+  surname: Parker
+  department: it
+  head: t
+  crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
+  salt: 25f1790bdde450f93607cb87b55fed383be738a3
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  roles: user, head
+
+oliver:
+  username: oliver.barnes
+  firstname: Oliver
+  surname: Barnes
+  department: it
+  head: f
+  crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
+  salt: 25f1790bdde450f93607cb87b55fed383be738a3
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  roles: user
+
+dom:
+  username: dom.santini
+  firstname: Dominic
+  surname: Santini
+  department: sales
+  head: t
+  crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
+  salt: 25f1790bdde450f93607cb87b55fed383be738a3
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  roles: user, head
+
+string:
+  username: string.hawke
+  firstname: Stringfellow
+  surname: Hawke
+  department: sales
+  head: f
+  crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
+  salt: 25f1790bdde450f93607cb87b55fed383be738a3
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  roles: user
+
+admin:
+  username: admin
+  firstname: admin
+  surname: 
+  department: 
+  head: f
+  crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
+  salt: 25f1790bdde450f93607cb87b55fed383be738a3
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  roles: admin

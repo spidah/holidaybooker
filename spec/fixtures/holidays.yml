@@ -1,0 +1,59 @@
+unconfirmed:
+  user: ned
+  start_date: <%= Date.today %>
+  end_date: <%= Date.today + 1.week - 1.day %>
+  total_days: 5
+  reason: Test holiday
+  confirmed: f
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  rejected: f
+  rejected_reason: 
+
+confirmed:
+  user: ned
+  start_date: <%= Date.today + 1.week %>
+  end_date: <%= Date.today + 2.weeks - 1.day %>
+  total_days: 5
+  reason: Test holiday
+  confirmed: t
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  rejected: f
+  rejected_reason: 
+
+rejected:
+  user: ned
+  start_date: <%= Date.today + 8.weeks %>
+  end_date: <%= Date.today + 9.weeks - 1.day %>
+  total_days: 5
+  reason: Test holiday
+  confirmed: f
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  rejected: t
+  rejected_reason: conflicts
+
+past:
+  user: ned
+  start_date: <%= Date.today - 8.weeks %>
+  end_date: <%= Date.today - 7.weeks - 1.day %>
+  total_days: 5
+  reason: Test holiday
+  confirmed: f
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  rejected: f
+  rejected_reason: 
+
+future:
+  user: ned
+  start_date: <%= Date.today + 12.weeks %>
+  end_date: <%= Date.today + 13.weeks - 1.day %>
+  total_days: 5
+  reason: Test holiday
+  confirmed: f
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  rejected: f
+  rejected_reason: 
