@@ -3,5 +3,6 @@ vendor/rails:
   squashed: true
   type: git
   url: git://github.com/rails/rails.git
+  revision: 5cc27f2b0302698ef517755df41f3212587bceb9
   branch: master
   remote: braid/git/vendor/rails/master
