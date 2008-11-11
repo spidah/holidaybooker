@@ -1,5 +1,5 @@
 module LoginSystemTestHelper
   def login_as(user)
-    @request.session[:user_id] = user ? users(user).id : nil
+    @request.session[:user_id] = user ? (Symbol === user ? users(user).id : user.id) : nil
   end
 end
