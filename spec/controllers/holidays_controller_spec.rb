@@ -8,19 +8,16 @@ describe HolidaysController do
     login_as(@user)
   end
 
-  describe 'should be protected' do
-    it 'with an invalid user, should redirect' do
-      controller.stub!(:current_user).and_return(nil)
-      login_as(nil)
-      get :index
-      response.should be_redirect
-    end
+  it 'with an invalid user, should redirect' do
+    controller.stub!(:current_user).and_return(nil)
+    get :index
+    response.should be_redirect
+  end
 
-    it 'with an invalid role, should redirect' do
-      @user.stub!(:has_role?).and_return(false)
-      get :index
-      response.should be_redirect
-    end
+  it 'with an invalid role, should redirect' do
+    @user.stub!(:has_role?).and_return(false)
+    get :index
+    response.should be_redirect
   end
 
   describe 'GET index' do
