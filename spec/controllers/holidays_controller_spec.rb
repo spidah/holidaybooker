@@ -43,4 +43,27 @@ describe HolidaysController do
       response.should be_success
     end
   end
+
+  describe 'POST create' do
+    before do
+      @hol = mock('holiday')
+      @holiday.should_receive(:build).and_return(@hol)
+      @user.stub!(:holidays).and_return(@holiday)
+    end
+
+    it 'with valid parameters, should create a holiday and redirect' do
+      @hol.should_receive(:save).and_return(true)
+      post :create
+      flash[:error].should be_nil
+      response.should redirect_to(holidays_url)
+    end
+
+    it 'with invalid parameters, should set an error and redirect' do
+      @hol.should_receive(:save).and_return(false)
+      @hol.should_receive(:errors).and_return('not allowed')
+      post :create
+      flash[:error].should eql('not allowed')
+      response.should redirect_to(new_holiday_url)
+    end
+  end
 end
