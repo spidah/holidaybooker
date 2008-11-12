@@ -2,8 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe HolidaysController do
   before do
-    @user = mock('user', :id => 1)
-    @user.stub!(:has_role?).and_return(true)
+    @user = mock('user', :id => 1, :has_role? => true)
     controller.stub!(:current_user).and_return(@user)
     login_as(@user)
   end
