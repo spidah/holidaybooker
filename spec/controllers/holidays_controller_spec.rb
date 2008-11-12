@@ -3,6 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe HolidaysController do
   before do
     @user = mock('user', :id => 1, :has_role? => true)
+    @holiday = mock('holiday', :null_object => true)
+    @user.stub!(:holidays).and_return(@holiday)
     controller.stub!(:current_user).and_return(@user)
     login_as(@user)
   end
@@ -21,8 +23,7 @@ describe HolidaysController do
 
   describe 'GET index' do
     before do
-      @holiday = mock('holiday', :null_object => true, :size => 1)
-      @user.stub!(:holidays).and_return(@holiday)
+      @holiday.stub!(:size).and_return(1)
       get :index
     end
 
@@ -33,8 +34,7 @@ describe HolidaysController do
 
   describe 'GET new' do
     before do
-      @holiday = mock('holiday', :null_object => true, :after => [])
-      @user.stub!(:holidays).and_return(@holiday)
+      @holiday.stub!(:after).and_return([])
       Holiday.should_receive(:new).and_return(@holiday)
       get :new
     end
