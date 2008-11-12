@@ -25,8 +25,8 @@ class HolidaysController < ApplicationController
   end
 
   def create
-    @holiday = Holiday.new(params[:holiday])
-    if @current_user.holidays << @holiday
+    @holiday = @current_user.holidays.build(params[:holiday])
+    if @holiday.save
       redirect_to(holidays_path)
     else
       flash[:error] = @holiday.errors
