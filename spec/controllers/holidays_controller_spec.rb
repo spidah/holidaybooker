@@ -82,4 +82,32 @@ describe HolidaysController do
       response.should redirect_to(holidays_url)
     end
   end
+
+  describe 'GET edit' do
+    before do
+      @hol = mock('holiday')
+      @holiday.stub!(:find).with(1).and_return(@hol)
+      @hol.stub!(:start_date).and_return(Date.today)
+    end
+
+    it 'with a valid id, should be a success' do
+      @hol.should_receive(:confirmed).and_return(false)
+      get :edit, :id => 1
+      response.should be_success
+    end
+
+    it 'with a confirmed holiday, should redirect to the index page' do
+      @hol.should_receive(:confirmed).and_return(true)
+      get :edit, :id => 1
+      flash[:error].should eql('You are unable to edit a confirmed holiday. Please delete it and submit a new one.')
+      response.should redirect_to(holidays_url)
+    end
+
+    it 'with an invalid id, should redirect to the index page' do
+      @holiday.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      get :edit, :id => 1
+      flash[:error].should eql('Unable to edit that holiday.')
+      response.should redirect_to(holidays_url)
+    end
+  end
 end
