@@ -110,4 +110,28 @@ describe HolidaysController do
       response.should redirect_to(holidays_url)
     end
   end
+
+  describe 'PUT update' do
+    it 'with a valid holiday, should update and redirect to the unconfirmed page' do
+      @holiday.should_receive(:update_attributes!).and_return(true)
+      put :update, :id => 1, :holiday => {}
+      response.should redirect_to(unconfirmed_holidays_url)
+    end
+
+    it 'with an invalid holiday, should redirect to the unconfirmed page' do
+      @holiday.should_receive(:update_attributes!).and_raise(ActiveRecord::RecordNotSaved)
+      @holiday.should_receive(:errors).and_return('not allowed')
+      put :update, :id => 1, :holiday => {}
+      flash[:error].should eql('not allowed')
+      response.should redirect_to(unconfirmed_holidays_url)
+    end
+
+    it 'with an invalid id, should redirect to the unconfirmed page' do
+      @holiday.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @holiday.should_not_receive(:update_attributes!)
+      put :update, :id => 1, :holiday => {}
+      flash[:error].should eql('Unable to update that holiday.')
+      response.should redirect_to(unconfirmed_holidays_url)
+    end
+  end
 end
