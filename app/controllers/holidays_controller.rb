@@ -58,10 +58,12 @@ class HolidaysController < ApplicationController
     params[:holiday].delete(:confirmed)
     @holiday.rejected = false
     @holiday.rejected_reason = nil
-    @holiday.update_attributes(params[:holiday])
-    redirect_to(unconfirmed_holidays_path)
-  rescue
+    @holiday.update_attributes!(params[:holiday])
+  rescue ActiveRecord::RecordNotSaved
     flash[:error] = @holiday.errors
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to update that holiday.'
+  ensure
     redirect_to(unconfirmed_holidays_path)
   end
 
