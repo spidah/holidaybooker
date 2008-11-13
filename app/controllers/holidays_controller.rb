@@ -14,6 +14,9 @@ class HolidaysController < ApplicationController
     @holiday = @current_user.holidays.find(params[:id].to_i)
     session[:calendar_date] = nil
     populate_vars(@holiday.start_date)
+  rescue
+    flash[:error] = 'Unable to display that holiday.'
+    redirect_to(holidays_path)
   end
 
   def new
