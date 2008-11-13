@@ -3,8 +3,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe HolidaysController do
   before do
     @user = mock('user', :id => 1, :has_role? => true)
-    @holiday = mock('holiday', :null_object => true)
-    @user.stub!(:holidays).and_return(@holiday)
+    @holiday = mock('holiday')
+    @holidays = mock('holiday', :null_object => true)
+    @holidays.stub!(:find).and_return(@holiday)
+    @user.stub!(:holidays).and_return(@holidays)
     controller.stub!(:current_user).and_return(@user)
     login_as(@user)
   end
@@ -23,7 +25,7 @@ describe HolidaysController do
 
   describe 'GET index' do
     before do
-      @holiday.stub!(:size).and_return(1)
+      @holidays.stub!(:size).and_return(1)
       get :index
     end
 
@@ -34,7 +36,7 @@ describe HolidaysController do
 
   describe 'GET new' do
     before do
-      @holiday.stub!(:after).and_return([])
+      @holidays.stub!(:after).and_return([])
       Holiday.should_receive(:new).and_return(@holiday)
       get :new
     end
@@ -46,21 +48,19 @@ describe HolidaysController do
 
   describe 'POST create' do
     before do
-      @hol = mock('holiday')
-      @holiday.should_receive(:build).and_return(@hol)
-      @user.stub!(:holidays).and_return(@holiday)
+      @holidays.should_receive(:build).and_return(@holiday)
     end
 
     it 'with valid parameters, should create a holiday and redirect' do
-      @hol.should_receive(:save).and_return(true)
+      @holiday.should_receive(:save).and_return(true)
       post :create
       flash[:error].should be_nil
       response.should redirect_to(holidays_url)
     end
 
     it 'with invalid parameters, should set an error and redirect' do
-      @hol.should_receive(:save).and_return(false)
-      @hol.should_receive(:errors).and_return('not allowed')
+      @holiday.should_receive(:save).and_return(false)
+      @holiday.should_receive(:errors).and_return('not allowed')
       post :create
       flash[:error].should eql('not allowed')
       response.should redirect_to(new_holiday_url)
@@ -69,14 +69,13 @@ describe HolidaysController do
 
   describe 'GET show' do
     it 'with a valid id, should be a success' do
-      @holiday.should_receive(:find).with(1).and_return(@holiday)
       @holiday.should_receive(:start_date).and_return(Date.today)
       get :show, :id => 1
       response.should be_success
     end
 
     it 'with an invalid id, should redirect to the index page' do
-      @holiday.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @holidays.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
       get :show, :id => 1
       flash[:error].should eql('Unable to display that holiday.')
       response.should redirect_to(holidays_url)
@@ -85,26 +84,24 @@ describe HolidaysController do
 
   describe 'GET edit' do
     before do
-      @hol = mock('holiday')
-      @holiday.stub!(:find).with(1).and_return(@hol)
-      @hol.stub!(:start_date).and_return(Date.today)
+      @holiday.stub!(:start_date).and_return(Date.today)
     end
 
     it 'with a valid id, should be a success' do
-      @hol.should_receive(:confirmed).and_return(false)
+      @holiday.should_receive(:confirmed).and_return(false)
       get :edit, :id => 1
       response.should be_success
     end
 
     it 'with a confirmed holiday, should redirect to the index page' do
-      @hol.should_receive(:confirmed).and_return(true)
+      @holiday.should_receive(:confirmed).and_return(true)
       get :edit, :id => 1
       flash[:error].should eql('You are unable to edit a confirmed holiday. Please delete it and submit a new one.')
       response.should redirect_to(holidays_url)
     end
 
     it 'with an invalid id, should redirect to the index page' do
-      @holiday.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @holidays.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
       get :edit, :id => 1
       flash[:error].should eql('Unable to edit that holiday.')
       response.should redirect_to(holidays_url)
@@ -112,6 +109,11 @@ describe HolidaysController do
   end
 
   describe 'PUT update' do
+    before do
+      @holiday.stub!(:rejected=)
+      @holiday.stub!(:rejected_reason=)
+    end
+
     it 'with a valid holiday, should update and redirect to the unconfirmed page' do
       @holiday.should_receive(:update_attributes!).and_return(true)
       put :update, :id => 1, :holiday => {}
@@ -127,7 +129,7 @@ describe HolidaysController do
     end
 
     it 'with an invalid id, should redirect to the unconfirmed page' do
-      @holiday.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @holidays.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
       @holiday.should_not_receive(:update_attributes!)
       put :update, :id => 1, :holiday => {}
       flash[:error].should eql('Unable to update that holiday.')
