@@ -11,7 +11,7 @@ class HolidaysController < ApplicationController
   def show
     include_extra_stylesheet('calendar')
     include_extra_javascript('calendar')
-    @holiday = @current_user.holidays.find(params[:id])
+    @holiday = @current_user.holidays.find(params[:id].to_i)
     session[:calendar_date] = nil
     populate_vars(@holiday.start_date)
   end
@@ -37,7 +37,7 @@ class HolidaysController < ApplicationController
   def edit
     include_extra_stylesheet('calendar')
     include_extra_javascript('calendar')
-    @holiday = @current_user.holidays.find(params[:id])
+    @holiday = @current_user.holidays.find(params[:id].to_i)
     if @holiday.confirmed
       flash[:error] = 'You are unable to edit a confirmed holiday. Please delete it and submit a new one.'
       redirect_to(holidays_path)
@@ -48,7 +48,7 @@ class HolidaysController < ApplicationController
   end
 
   def update
-    @holiday = @current_user.holidays.find(params[:id])
+    @holiday = @current_user.holidays.find(params[:id].to_i)
     params[:holiday].delete(:confirmed)
     @holiday.rejected = false
     @holiday.rejected_reason = nil
@@ -60,7 +60,7 @@ class HolidaysController < ApplicationController
   end
 
   def destroy
-    @holiday = @current_user.holidays.find(params[:id])
+    @holiday = @current_user.holidays.find(params[:id].to_i)
     confirmed = @holiday.confirmed
     @holiday.destroy
     redirect_to(confirmed ? confirmed_holidays_path : unconfirmed_holidays_path)
