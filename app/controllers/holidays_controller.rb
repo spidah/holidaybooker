@@ -48,6 +48,9 @@ class HolidaysController < ApplicationController
       session[:calendar_date] = nil
       populate_vars(@holiday.start_date)
     end
+  rescue
+    flash[:error] = 'Unable to edit that holiday.'
+    redirect_to(holidays_path)
   end
 
   def update
