@@ -66,4 +66,20 @@ describe HolidaysController do
       response.should redirect_to(new_holiday_url)
     end
   end
+
+  describe 'GET show' do
+    it 'with a valid id, should be a success' do
+      @holiday.should_receive(:find).with(1).and_return(@holiday)
+      @holiday.should_receive(:start_date).and_return(Date.today)
+      get :show, :id => 1
+      response.should be_success
+    end
+
+    it 'with an invalid id, should redirect to the index page' do
+      @holiday.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      get :show, :id => 1
+      flash[:error].should eql('Unable to display that holiday.')
+      response.should redirect_to(holidays_url)
+    end
+  end
 end
