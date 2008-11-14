@@ -160,4 +160,28 @@ describe HolidaysController do
       response.should redirect_to(holidays_url)
     end
   end
+
+  describe 'GET confirmed' do
+    it 'should be a success' do
+      @holidays.should_receive(:confirmed).and_return(@holidays)
+      get :confirmed
+      response.should be_success
+    end
+  end
+
+  describe 'GET unconfirmed' do
+    it 'should be a success' do
+      @holidays.should_receive(:unconfirmed).and_return(@holidays)
+      get :unconfirmed
+      response.should be_success
+    end
+  end
+
+  describe 'GET taken' do
+    it 'should be a success' do
+      @holidays.should_receive(:before).and_return(@holidays)
+      get :taken
+      response.should be_success
+    end
+  end
 end
