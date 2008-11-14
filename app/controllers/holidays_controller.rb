@@ -69,9 +69,8 @@ class HolidaysController < ApplicationController
 
   def destroy
     @holiday = @current_user.holidays.find(params[:id].to_i)
-    confirmed = @holiday.confirmed
     @holiday.destroy
-    redirect_to(confirmed ? confirmed_holidays_path : unconfirmed_holidays_path)
+    redirect_to(@holiday.confirmed ? confirmed_holidays_path : unconfirmed_holidays_path)
   end
 
   def change_month
