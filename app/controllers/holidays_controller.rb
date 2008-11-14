@@ -71,6 +71,9 @@ class HolidaysController < ApplicationController
     @holiday = @current_user.holidays.find(params[:id].to_i)
     @holiday.destroy
     redirect_to(@holiday.confirmed ? confirmed_holidays_path : unconfirmed_holidays_path)
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to delete that holiday.'
+    redirect_to(holidays_path)
   end
 
   def change_month
