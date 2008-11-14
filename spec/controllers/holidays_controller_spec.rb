@@ -136,4 +136,28 @@ describe HolidaysController do
       response.should redirect_to(unconfirmed_holidays_url)
     end
   end
+
+  describe 'DELETE destroy' do
+    it 'with a valid confirmed holiday, should destroy and redirect to the confirmed page' do
+      @holiday.should_receive(:confirmed).and_return(true)
+      @holiday.should_receive(:destroy)
+      delete :destroy, :id => 1
+      response.should redirect_to(confirmed_holidays_url)
+    end
+
+    it 'with a valid unconfirmed holiday, should destroy and redirect to the unconfirmed page' do
+      @holiday.should_receive(:confirmed).and_return(false)
+      @holiday.should_receive(:destroy)
+      delete :destroy, :id => 1
+      response.should redirect_to(unconfirmed_holidays_url)
+    end
+
+    it 'with an invalid id, should redirect to the index page' do
+      @holidays.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @holiday.should_not_receive(:destroy)
+      delete :destroy, :id => 1
+      flash[:error].should eql('Unable to delete that holiday.')
+      response.should redirect_to(holidays_url)
+    end
+  end
 end
