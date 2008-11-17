@@ -5,6 +5,7 @@ describe Admin::AdminDepartmentsController do
     @user = mock('user', :id => 1, :has_role? => true)
     controller.stub!(:current_user).and_return(@user)
     @department = mock('department')
+    Department.stub!(:find).with(1).and_return(@department)
   end
 
   it 'with an invalid user, should redirect' do
@@ -76,6 +77,20 @@ describe Admin::AdminDepartmentsController do
       post :create
       flash[:error].should eql('not allowed')
       response.should render_template(:new)
+    end
+  end
+
+  describe 'GET edit' do
+    it 'with a valid id, should be a success' do
+      get :edit, :id => 1
+      response.should be_success
+    end
+
+    it 'with an invalid id, should set an error and redirect to the index page' do
+      Department.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      get :edit, :id => 1
+      flash[:error].should eql('Unable to edit the selected department')
+      response.should redirect_to(admin_departments_url)
     end
   end
 end
