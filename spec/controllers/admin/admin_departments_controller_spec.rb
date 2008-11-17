@@ -117,4 +117,19 @@ describe Admin::AdminDepartmentsController do
       response.should redirect_to(admin_departments_url)
     end
   end
+
+  describe 'DELETE destroy' do
+    it 'with a valid id, should destroy and redirect to the index page' do
+      @department.should_receive(:destroy)
+      delete :destroy, :id => 1
+      response.should redirect_to(admin_departments_url)
+    end
+
+    it 'with an invalid id, should set an error and redirect to the index page' do
+      Department.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      delete :destroy, :id => 1
+      flash[:error].should eql('Unable to delete the selected department')
+      response.should redirect_to(admin_departments_url)
+    end
+  end
 end
