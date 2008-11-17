@@ -21,6 +21,9 @@ class Admin::AdminDepartmentsController < ApplicationController
 
   def edit
     @department = Department.find(params[:id].to_i)
+  rescue
+    flash[:error] = 'Unable to edit the selected department'
+    redirect_to(admin_departments_path)
   end
 
   def update
