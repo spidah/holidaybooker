@@ -20,11 +20,11 @@ class Admin::AdminDepartmentsController < ApplicationController
   end
 
   def edit
-    @department = Department.find(params[:id])
+    @department = Department.find(params[:id].to_i)
   end
 
   def update
-    @department = Department.find(params[:id])
+    @department = Department.find(params[:id].to_i)
     @department.update_attributes(params[:department])
     redirect_to(admin_departments_path)
   rescue
@@ -33,7 +33,7 @@ class Admin::AdminDepartmentsController < ApplicationController
   end
 
   def destroy
-    @department = Department.find(params[:id])
+    @department = Department.find(params[:id].to_i)
     @department.destroy
     redirect_to(admin_departments_path)
   rescue
