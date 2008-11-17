@@ -28,9 +28,12 @@ class Admin::AdminDepartmentsController < ApplicationController
 
   def update
     @department = Department.find(params[:id].to_i)
-    @department.update_attributes(params[:department])
+    @department.update_attributes!(params[:department])
     redirect_to(admin_departments_path)
-  rescue
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to update the selected department'
+    redirect_to(admin_departments_path)
+  rescue ActiveRecord::RecordNotSaved
     flash[:error] = @department.errors
     redirect_to(edit_admin_department_path(@department))
   end
