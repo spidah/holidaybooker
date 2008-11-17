@@ -15,7 +15,7 @@ class Admin::AdminDepartmentsController < ApplicationController
     @department.save!
     redirect_to(admin_departments_path)
   rescue
-    flash[:error] = @department.errors
+    flash.now[:error] = @department.errors
     render(:action => :new)
   end
 
