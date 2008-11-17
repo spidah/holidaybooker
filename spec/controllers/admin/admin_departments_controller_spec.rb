@@ -93,4 +93,28 @@ describe Admin::AdminDepartmentsController do
       response.should redirect_to(admin_departments_url)
     end
   end
+
+  describe 'PUT update' do
+    it 'with valid parameters, should update and redirect to the index page' do
+      @department.should_receive(:update_attributes!)
+      put :update, :id => 1, :department => {}
+      response.should redirect_to(admin_departments_url)
+    end
+
+    it 'with invalid parameters, should set an error and show the edit page' do
+      @department.should_receive(:update_attributes!).and_raise(ActiveRecord::RecordNotSaved)
+      @department.should_receive(:errors).and_return('not allowed')
+      put :update, :id => 1, :department => {}
+      flash[:error].should eql('not allowed')
+      response.should redirect_to(edit_admin_department_url(@department))
+    end
+
+    it 'with an invalid id, should set an error and redirect to the index page' do
+      Department.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @department.should_not_receive(:update_attributes!)
+      put :update, :id => 1, :department => {}
+      flash[:error].should eql('Unable to update the selected department')
+      response.should redirect_to(admin_departments_url)
+    end
+  end
 end
