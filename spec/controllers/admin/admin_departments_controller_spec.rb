@@ -71,7 +71,7 @@ describe Admin::AdminDepartmentsController do
       response.should redirect_to(admin_departments_url)
     end
 
-    it 'with invalid parameters, should set and error and show the new department page' do
+    it 'with invalid parameters, should set an error and show the new department page' do
       @department.should_receive(:save!).and_raise(ActiveRecord::RecordNotSaved)
       @department.should_receive(:errors).and_return('not allowed')
       post :create
