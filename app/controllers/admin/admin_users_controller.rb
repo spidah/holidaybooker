@@ -9,6 +9,9 @@ class Admin::AdminUsersController < ApplicationController
   def edit
     @user = User.find(params[:id].to_i)
     @departments = Department.find(:all)
+  rescue
+    flash[:error] = 'Unable to edit the selected user'
+    redirect_to(admin_users_path)
   end
 
   def update
@@ -22,22 +25,40 @@ class Admin::AdminUsersController < ApplicationController
       department = Department.find(params[:department])
       @user.department = department
     end
-    @user.update_attributes(user_params)
+    @user.update_attributes!(user_params)
 
     redirect_to(admin_users_path)
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to update the selected user'
+    redirect_to(admin_users_path)
+  rescue ActiveRecord::RecordNotSaved
+    flash.now[:error] = @user.errors
+    render(:action => 'edit')
   end
 
   def change_head
     @user = User.find(params[:id].to_i)
     @user.head = !@user.head
-    @user.save
+    @user.save!
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to update the selected user'
+    redirect_to(admin_users_path)
+  rescue ActiveRecord::RecordNotSaved
+    flash[:error] = 'Unable to change the head value for the selected user'
+    redirect_to(admin_users_path)
   end
 
   def change_admin
     @user = User.find(params[:id].to_i)
     @user.admin = !@user.admin
-    @user.save
+    @user.save!
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to update the selected user'
+    redirect_to(admin_users_path)
+  rescue ActiveRecord::RecordNotSaved
+    flash[:error] = 'Unable to change the admin value for the selected user'
+    redirect_to(admin_users_path)
   end
 end
