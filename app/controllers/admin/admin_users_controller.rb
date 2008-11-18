@@ -7,12 +7,12 @@ class Admin::AdminUsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
     @departments = Department.find(:all)
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
     user_params = params[:user]
     head = user_params[:head] == '1'
     @user.head = head
@@ -28,14 +28,14 @@ class Admin::AdminUsersController < ApplicationController
   end
 
   def change_head
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
     @user.head = !@user.head
     @user.save
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
   end
 
   def change_admin
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
     @user.admin = !@user.admin
     @user.save
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
