@@ -56,14 +56,21 @@ class User < ActiveRecord::Base
     false
   end
 
+  def head
+    @head ||= has_role?('head')
+  end
+
   def head=(head_value)
     department_head_role = Role.get('head')
-    self[:head] = head_value
     if head_value
       roles.find(department_head_role) rescue roles << department_head_role
     else
       roles.delete(department_head_role)
     end
+  end
+
+  def admin
+    @admin ||= has_role?('admin')
   end
 
   def admin=(admin_value)
