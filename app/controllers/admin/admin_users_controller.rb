@@ -36,6 +36,15 @@ class Admin::AdminUsersController < ApplicationController
     render(:action => 'edit')
   end
 
+  def destroy
+    @user = User.find(params[:id].to_i)
+    @user.destroy
+  rescue
+    flash[:error] = 'Unable to delete the selected user'
+  ensure
+    redirect_to(admin_users_path)
+  end
+
   def change_head
     @user = User.find(params[:id].to_i)
     @user.head = !@user.head
