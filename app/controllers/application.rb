@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   # home action that is used to redirect the user to where they need to be, depending on their role
   def home
     redirect_to(login_path) and return if !@current_user
-    redirect_to(admin_users_path) and return if @current_user.has_role?('admin')
-    redirect_to(departments_path) and return if @current_user.has_role?('head')
+    redirect_to(admin_users_path) and return if @current_user.admin
+    redirect_to(departments_path) and return if @current_user.head
     redirect_to(holidays_path)
   end
 

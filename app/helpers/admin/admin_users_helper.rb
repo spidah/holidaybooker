@@ -9,9 +9,8 @@ module Admin::AdminUsersHelper
     link_to(image_tag(user.head ? '/images/tick.gif' : '/images/cross.gif'), change_head_admin_user_path(user), :class => 'change-head')
   end
 
-  def admin_link(user, admin_role)
-    admin = true if user.roles.find(admin_role.id) rescue false
-    link_to(image_tag(admin ? '/images/tick.gif' : '/images/cross.gif'), change_admin_admin_user_path(user), :class => 'change-admin')
+  def admin_link(user)
+    link_to(image_tag(user.admin ? '/images/tick.gif' : '/images/cross.gif'), change_admin_admin_user_path(user), :class => 'change-admin')
   end
 
   def print_roles(roles)

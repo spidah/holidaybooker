@@ -19,7 +19,7 @@
     </div>
     <div class="form-row">
       <label for="admin" class="label">Admin</label>
-      <span class="data"><%= @user.id == @current_user.id ? 'true (cannot edit your own admin status)' : check_box_tag('admin', 'admin', @admin) -%></span>
+      <span class="data"><%= @user.id == @current_user.id ? 'true (cannot edit your own admin status)' : check_box_tag('admin', 'admin', @user.admin) -%></span>
     </div>
     <div class="form-row">
       <span class="data"><input type="submit" name="update" value="Update" /></span>

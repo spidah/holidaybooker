@@ -4,7 +4,7 @@
       <td><%= user.surname -%></td>
       <td><%= user.department.name if user.department -%></td>
       <td class="image"><%= head_link(user) -%></td>
-      <td class="image"><%= admin_link(user, @admin_role) -%></td>
+      <td class="image"><%= admin_link(user) -%></td>
       <td><%= print_roles(user.roles) -%></td>
       <td class="image"><%= link_to image_tag('/images/edit.gif'), edit_admin_user_path(user) -%></td>
       <td class="image"><%= link_to image_tag('/images/delete.gif'), admin_user_path(user),
