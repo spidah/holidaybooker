@@ -16,16 +16,11 @@ class Admin::AdminUsersController < ApplicationController
 
   def update
     @user = User.find(params[:id].to_i)
-    user_params = params[:user]
-    head = user_params[:head] == '1'
-    @user.head = head
-    admin = params[:admin]
-    @user.admin = admin
-    if params[:department]
-      department = Department.find(params[:department])
-      @user.department = department
-    end
-    @user.update_attributes!(user_params)
+    uparams = params[:user]
+    @user.head = uparams[:head] == '1'
+    @user.admin = uparams[:admin] == '1'
+    @user.department = Department.find(uparams[:department].to_i) if uparams[:department]
+    @user.update_attributes!(uparams.except(:head).except(:admin).except(:department))
 
     redirect_to(admin_users_path)
   rescue ActiveRecord::RecordNotFound
