@@ -21,7 +21,7 @@ class DepartmentsController < ApplicationController
   end
 
   def update
-    @holiday = Holiday.find(params[:id])
+    @holiday = Holiday.find(params[:id].to_i)
 
     if params[:holiday][:rejected] == 't'
       @holiday.rejected = true
@@ -49,7 +49,7 @@ class DepartmentsController < ApplicationController
 
   protected
     def get_holiday
-      @holiday = Holiday.find(params[:id])
+      @holiday = Holiday.find(params[:id].to_i)
       get_department_users
       populate_vars(@holiday.start_date)
     end
