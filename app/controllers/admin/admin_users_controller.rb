@@ -18,8 +18,10 @@ class Admin::AdminUsersController < ApplicationController
     @user.head = head
     admin = params[:admin]
     @user.admin = admin
-    department = Department.find(params[:department])
-    @user.department = department
+    if params[:department]
+      department = Department.find(params[:department])
+      @user.department = department
+    end
     @user.update_attributes(user_params)
 
     redirect_to(admin_users_path)
