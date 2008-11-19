@@ -11,6 +11,9 @@ class DepartmentsController < ApplicationController
     include_extra_javascript('gantt')
     session[:calendar_date] = nil
     get_holiday
+  rescue
+    flash[:error] = 'Unable to display the selected holiday'
+    redirect_to(departments_path)
   end
 
   def edit
@@ -18,6 +21,9 @@ class DepartmentsController < ApplicationController
     include_extra_javascript('gantt')
     session[:calendar_date] = nil
     get_holiday
+  rescue
+    flash[:error] = 'Unable to edit the selected holiday'
+    redirect_to(departments_path)
   end
 
   def update
@@ -31,9 +37,11 @@ class DepartmentsController < ApplicationController
     end
 
     @holiday.save!
-    redirect_to(departments_path)
-  rescue
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Unable to update the selected holiday'
+  rescue ActiveRecord::RecordNotSaved
     flash[:error] = @holiday.errors
+  ensure
     redirect_to(departments_path)
   end
 
