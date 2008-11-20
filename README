@@ -50,3 +50,28 @@ they need to take a look at them. Email notifications of confirmations and
 rejections can also be sent back to the employee submitting the holiday request.
 Email notifications haven't been added yet as this is currently only intended
 as a demonstration website, not a fully fledged working website.
+
+== First Run
+
+Before using the website for the first time you need to do a little preparation.
+After you've migrated (or loaded with db:schema:load) you need to run the setup
+rake task. This is as simple as doing:
+
+rake db:setup
+
+It'll ask you for an admin username and password, then it'll ask you for
+individual user usernames and passwords. Once you have entered some users you
+will be able to use the website.
+
+Next you'll need to login using the admin user that you just created. You'll be
+taken to the admin interface where you can add/edit/delete users, as well as
+departments. There are currently no departments, so you will need to add some.
+Just click the departments link in the menu bar to do that.
+
+Once you have added some departments you will need to put users in them. You do
+this by clicking the users link in the menu bar then clicking edit next to each
+user. You can pick the department from there, then save. It's a little winded at
+the moment, but it will be made a bit better in the future.
+
+Once you have added departments and assigned users to them you are set to use
+the website for real. Have fun!
