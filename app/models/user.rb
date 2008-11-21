@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
     else
       roles.delete(department_head_role)
     end
+    @head = has_role?('head')
   end
 
   def admin
@@ -80,6 +81,7 @@ class User < ActiveRecord::Base
     else
       roles.delete(admin_role)
     end
+    @admin = has_role?('admin')
   end
 
   def self.get_department_users(department)
