@@ -3,8 +3,9 @@ $(document).ready(function() {
     $('a.change-head,a.change-admin').click(function() {
       var row = $(this).parent().parent().get(0);
       $.ajax({
-        type: 'GET',
+        type: 'PUT',
         url: $(this).attr('href'),
+        data: "authenticity_token=" + encodeURIComponent(AUTH_TOKEN),
         success: function(html) {
           $(row).before(html).remove();
           setupImageClicks();

@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources         :departments,             :member => { :change_month => :get }
 
   map.namespace(:admin) do |admin|
-    admin.resources :users,                       :controller => 'admin_users',         :member => { :change_head => :get, :change_admin => :get }
+    admin.resources :users,                       :controller => 'admin_users',         :member => { :change_head => :put, :change_admin => :put }
     admin.resources :departments,                 :controller => 'admin_departments'
   end
 

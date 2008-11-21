@@ -109,47 +109,47 @@ describe Admin::AdminUsersController do
     end
   end
 
-  describe 'POST change_head' do
+  describe 'PUT change_head' do
     it 'with a head user, should remove head status and render the user partial' do
       @user.should_receive(:head).and_return(true)
       @user.should_receive(:head=).with(false)
-      post :change_head, :id => 1
+      put :change_head, :id => 1
       response.should render_template(:user_item)
     end
 
     it 'with a non-head user, should add head status and render the user partial' do
       @user.should_receive(:head).and_return(false)
       @user.should_receive(:head=).with(true)
-      post :change_head, :id => 1
+      put :change_head, :id => 1
       response.should render_template(:user_item)
     end
 
     it 'with an invalid id, should set an error and redirect to the index page' do
       User.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
-      post :change_head, :id => 1
+      put :change_head, :id => 1
       flash[:error].should eql('Unable to update the selected user')
       response.should redirect_to(admin_users_url)
     end
   end
 
-  describe 'POST change_admin' do
+  describe 'PUT change_admin' do
     it 'with an admin user, should remove admin status and render the user partial' do
       @user.should_receive(:admin).and_return(true)
       @user.should_receive(:admin=).with(false)
-      post :change_admin, :id => 1
+      put :change_admin, :id => 1
       response.should render_template(:user_item)
     end
 
     it 'with a non-admin user, should add admin status and render the user partial' do
       @user.should_receive(:admin).and_return(false)
       @user.should_receive(:admin=).with(true)
-      post :change_admin, :id => 1
+      put :change_admin, :id => 1
       response.should render_template(:user_item)
     end
 
     it 'with an invalid id, should set an error and redirect to the index page' do
       User.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
-      post :change_admin, :id => 1
+      put :change_admin, :id => 1
       flash[:error].should eql('Unable to update the selected user')
       response.should redirect_to(admin_users_url)
     end
