@@ -1,6 +1,11 @@
 class Admin::AdminDepartmentsController < ApplicationController
   needs_role :admin
 
+  verify :method => :get, :only => [:index, :edit], :redirect_to => :index
+  verify :method => :post, :only => [:create], :redirect_to => :index
+  verify :method => :put, :only => [:update]
+  verify :method => :delete, :only => :destroy, :redirect_to => :index
+
   def index
     @departments = Department.pagination(params[:page], params[:dir] ? 'DESC' : 'ASC')
     redirect_to(new_admin_department_path) if @departments.size == 0 && Department.all.size == 0
