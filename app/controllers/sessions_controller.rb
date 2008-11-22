@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  verify :method => :get, :only => [:new], :redirect_to => :index
+  verify :method => :post, :only => [:create, :signup], :redirect_to => :index
+  verify :method => :delete, :only => :destroy, :redirect_to => :index
+
   def new
     redirect_to(home_path) and return if @current_user
     @user = User.new
