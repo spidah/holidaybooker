@@ -1,6 +1,11 @@
 class HolidaysController < ApplicationController
   needs_role :user
 
+  verify :method => :get, :only => [:index, :new, :edit, :show, :change_month, :confirmed, :unconfirmed, :taken], :redirect_to => :index
+  verify :method => :post, :only => [:create], :redirect_to => :index
+  verify :method => :put, :only => [:update], :redirect_to => :index
+  verify :method => :delete, :only => :destroy, :redirect_to => :index
+
   def index
     date = current_date
     @confirmed = @current_user.holidays.confirmed.after(date).size
