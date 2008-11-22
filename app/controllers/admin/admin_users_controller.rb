@@ -2,7 +2,8 @@ class Admin::AdminUsersController < ApplicationController
   needs_role :admin
 
   verify :method => :get, :only => [:index, :edit], :redirect_to => :index
-  verify :method => :put, :only => [:update, :change_head, :change_admin]
+  verify :method => :put, :only => [:update], :redirect_to => :index
+  verify :method => :put, :only => [:change_head, :change_admin]
   verify :method => :delete, :only => :destroy, :redirect_to => :index
 
   def index
