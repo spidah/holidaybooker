@@ -1,6 +1,9 @@
 class DepartmentsController < ApplicationController
   needs_role :head
 
+  verify :method => :get, :only => [:index, :show, :edit], :redirect_to => :index
+  verify :method => :put, :only => [:update], :redirect_to => :index
+
   def index
     get_department_users
     @current_date = current_date
