@@ -1,5 +1,5 @@
 class HolidaysController < ApplicationController
-  needs_role :user, :actions => [:index, :new, :create, :show, :edit, :update, :destroy, :confirmed, :unconfirmed, :taken, :change_month]
+  needs_role :user
 
   def index
     date = current_date
