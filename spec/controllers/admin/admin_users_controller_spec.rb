@@ -154,4 +154,30 @@ describe Admin::AdminUsersController do
       response.should redirect_to(admin_users_url)
     end
   end
+
+  describe 'PUT change_department' do
+    it 'with a valid department, should set the department, save, and render the user partial' do
+      Department.should_receive(:find).with(1).and_return(@department)
+      @user.should_receive(:department=)
+      @user.should_receive(:save!)
+      put :change_department, :id => 1, :department => 1
+      response.should render_template(:user_item)
+    end
+
+    it 'with an invalid department, should return a 404 status' do
+      Department.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @user.should_not_receive(:department=)
+      @user.should_not_receive(:save!)
+      put :change_department, :id => 1, :department => 1
+      response.response_code.should == 404
+    end
+
+    it 'with an invalid user, should return a 404 status' do
+      User.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @user.should_not_receive(:department=)
+      @user.should_not_receive(:save!)
+      put :change_department, :id => 1, :department => 1
+      response.response_code.should == 404
+    end
+  end
 end

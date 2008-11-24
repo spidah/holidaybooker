@@ -3,7 +3,7 @@ class Admin::AdminUsersController < ApplicationController
 
   verify :method => :get, :only => [:index, :edit], :redirect_to => :index
   verify :method => :put, :only => [:update], :redirect_to => :index
-  verify :method => :put, :only => [:change_head, :change_admin]
+  verify :method => :put, :only => [:change_head, :change_admin, :change_department]
   verify :method => :delete, :only => :destroy, :redirect_to => :index
 
   def index
@@ -61,5 +61,14 @@ class Admin::AdminUsersController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Unable to update the selected user'
     redirect_to(admin_users_path)
+  end
+
+  def change_department
+    @user = User.find(params[:id].to_i)
+    @user.department = Department.find(params[:department].to_i)
+    @user.save!
+    render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
+  rescue
+    render(:status => :not_found)
   end
 end
