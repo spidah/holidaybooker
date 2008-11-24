@@ -126,9 +126,9 @@ describe Admin::AdminUsersController do
 
     it 'with an invalid id, should set an error and redirect to the index page' do
       User.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @user.should_not_receive(:head=)
       put :change_head, :id => 1
-      flash[:error].should eql('Unable to update the selected user')
-      response.should redirect_to(admin_users_url)
+      response.response_code.should == 404
     end
   end
 
@@ -149,9 +149,9 @@ describe Admin::AdminUsersController do
 
     it 'with an invalid id, should set an error and redirect to the index page' do
       User.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      @user.should_not_receive(:admin=)
       put :change_admin, :id => 1
-      flash[:error].should eql('Unable to update the selected user')
-      response.should redirect_to(admin_users_url)
+      response.response_code.should == 404
     end
   end
 

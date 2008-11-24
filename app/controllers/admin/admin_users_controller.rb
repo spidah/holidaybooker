@@ -49,18 +49,16 @@ class Admin::AdminUsersController < ApplicationController
     @user = User.find(params[:id].to_i)
     @user.head = !@user.head
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Unable to update the selected user'
-    redirect_to(admin_users_path)
+  rescue
+    render(:status => :not_found)
   end
 
   def change_admin
     @user = User.find(params[:id].to_i)
     @user.admin = !@user.admin
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Unable to update the selected user'
-    redirect_to(admin_users_path)
+  rescue
+    render(:status => :not_found)
   end
 
   def change_department
