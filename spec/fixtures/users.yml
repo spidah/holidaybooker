@@ -3,7 +3,6 @@ ned:
   firstname: Ned
   surname: Parker
   department: it
-  head: t
   crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
   salt: 25f1790bdde450f93607cb87b55fed383be738a3
   created_at: <%= Time.now %>
@@ -15,7 +14,6 @@ oliver:
   firstname: Oliver
   surname: Barnes
   department: it
-  head: f
   crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
   salt: 25f1790bdde450f93607cb87b55fed383be738a3
   created_at: <%= Time.now %>
@@ -27,7 +25,6 @@ dom:
   firstname: Dominic
   surname: Santini
   department: sales
-  head: t
   crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
   salt: 25f1790bdde450f93607cb87b55fed383be738a3
   created_at: <%= Time.now %>
@@ -39,7 +36,6 @@ string:
   firstname: Stringfellow
   surname: Hawke
   department: sales
-  head: f
   crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
   salt: 25f1790bdde450f93607cb87b55fed383be738a3
   created_at: <%= Time.now %>
@@ -51,7 +47,6 @@ admin:
   firstname: admin
   surname: 
   department: 
-  head: f
   crypted_password: 4a71b88dde95a5e305d62140196370ffdc9f2014 # password
   salt: 25f1790bdde450f93607cb87b55fed383be738a3
   created_at: <%= Time.now %>
