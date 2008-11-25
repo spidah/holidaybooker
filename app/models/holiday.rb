@@ -25,7 +25,7 @@ class Holiday < ActiveRecord::Base
   def in_month?(month)
     start_date = month.beginning_of_month
     end_date = month.end_of_month
-    (self[:start_date] >= start_date && self[:end_date] <= end_date) || (self[:start_date] >= start_date && self[:end_date] <= end_date)
+    (self[:start_date] >= start_date && self[:start_date] <= end_date) || (self[:end_date] <= end_date && self[:end_date] >= start_date)
   end
 
   def in_date?(date)
