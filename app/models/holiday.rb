@@ -23,9 +23,17 @@ class Holiday < ActiveRecord::Base
   validates_presence_of :reason, :message => 'Please give a reason for your holiday.'
 
   def in_month?(month)
-    start_date = month.beginning_of_month
-    end_date = month.end_of_month
-    (self[:start_date] >= start_date && self[:start_date] <= end_date) || (self[:end_date] <= end_date && self[:end_date] >= start_date)
+    @months ||= begin
+      sdate = self[:start_date]
+      edate = self[:end_date]
+      arr = []
+      while sdate.month <= edate.month && sdate.year <= edate.year do
+        arr << "#{sdate.month}#{sdate.year}"
+        sdate += 1.month
+      end
+      arr
+    end
+    @months.include?("#{month.month}#{month.year}")
   end
 
   def in_date?(date)

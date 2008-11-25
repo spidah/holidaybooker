@@ -7,8 +7,8 @@ describe Holiday, 'with fixtures loaded' do
     Holiday.find(:all).should_not be_empty
   end
 
-  it 'should have 5 holidays' do
-    Holiday.should have(5).records
+  it 'should have 6 holidays' do
+    Holiday.should have(6).records
   end
 
   it 'should find an existing holiday' do
@@ -121,5 +121,38 @@ describe 'User Ned' do
     holiday = holidays(:future)
 
     holiday.in_month?(Date.today).should_not be_true
+  end
+end
+
+describe 'User Oliver, with long holiday' do
+  fixtures :users, :holidays
+
+  before(:each) do
+    @user = users(:oliver)
+    @holiday = holidays(:long_holiday)
+  end
+
+  it 'should not be in next month' do
+    @holiday.in_month?(Date.today + 1.month).should == false
+  end
+
+  it 'should not be in two months' do
+    @holiday.in_month?(Date.today + 2.months).should == false
+  end
+
+  it 'should be in three months' do
+    @holiday.in_month?(Date.today + 3.months).should == true
+  end
+
+  it 'should be in four months' do
+    @holiday.in_month?(Date.today + 4.months).should == true
+  end
+
+  it 'should be in five months' do
+    @holiday.in_month?(Date.today + 5.months).should == true
+  end
+
+  it 'should not be in six months' do
+    @holiday.in_month?(Date.today + 6.months).should == false
   end
 end

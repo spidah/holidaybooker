@@ -57,3 +57,15 @@ future:
   updated_at: <%= Time.now %>
   rejected: f
   rejected_reason: 
+
+long_holiday:
+  user: oliver
+  start_date: <%= Date.today + 12.weeks %>
+  end_date: <%= Date.today + 22.weeks - 1.day %>
+  total_days: 50
+  reason: Long holiday
+  confirmed: f
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  rejected: f
+  rejected_reason: 
