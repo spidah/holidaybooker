@@ -3,7 +3,7 @@ unconfirmed:
   start_date: <%= Date.today %>
   end_date: <%= Date.today + 1.week - 1.day %>
   total_days: 5
-  reason: Test holiday
+  reason: Unconfirmed holiday
   confirmed: f
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
@@ -15,7 +15,7 @@ confirmed:
   start_date: <%= Date.today + 1.week %>
   end_date: <%= Date.today + 2.weeks - 1.day %>
   total_days: 5
-  reason: Test holiday
+  reason: Confirmed holiday
   confirmed: t
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
@@ -27,7 +27,7 @@ rejected:
   start_date: <%= Date.today + 8.weeks %>
   end_date: <%= Date.today + 9.weeks - 1.day %>
   total_days: 5
-  reason: Test holiday
+  reason: Rejected holiday
   confirmed: f
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
@@ -39,7 +39,7 @@ past:
   start_date: <%= Date.today - 8.weeks %>
   end_date: <%= Date.today - 7.weeks - 1.day %>
   total_days: 5
-  reason: Test holiday
+  reason: Past holiday
   confirmed: f
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
@@ -51,7 +51,7 @@ future:
   start_date: <%= Date.today + 12.weeks %>
   end_date: <%= Date.today + 13.weeks - 1.day %>
   total_days: 5
-  reason: Test holiday
+  reason: Future holiday
   confirmed: f
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
