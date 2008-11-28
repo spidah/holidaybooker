@@ -55,6 +55,7 @@ class Admin::AdminUsersController < ApplicationController
   end
 
   def change_admin
+    raise if @current_user.id == params[:id].to_i
     @user = User.find(params[:id].to_i)
     @user.admin = !@user.admin
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
