@@ -12,11 +12,19 @@ module Admin::AdminUsersHelper
   end
 
   def head_link(user)
-    link_to(image_tag(user.head ? '/images/tick.gif' : '/images/cross.gif'), change_head_admin_user_path(user), :class => 'change-head')
+    if user.id == @current_user.id
+      image_tag(user.head ? '/images/tick.gif' : '/images/cross.gif')
+    else
+      link_to(image_tag(user.head ? '/images/tick.gif' : '/images/cross.gif'), change_head_admin_user_path(user), :class => 'change-head')
+    end
   end
 
   def admin_link(user)
-    link_to(image_tag(user.admin ? '/images/tick.gif' : '/images/cross.gif'), change_admin_admin_user_path(user), :class => 'change-admin')
+    if user.id == @current_user.id
+      image_tag('/images/tick.gif')
+    else
+      link_to(image_tag(user.admin ? '/images/tick.gif' : '/images/cross.gif'), change_admin_admin_user_path(user), :class => 'change-admin')
+    end
   end
 
   def print_roles(roles)
