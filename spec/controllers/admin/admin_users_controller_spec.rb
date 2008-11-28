@@ -27,6 +27,7 @@ describe Admin::AdminUsersController do
   describe 'GET index' do
     before do
       User.stub!(:pagination).and_return([@user])
+      controller.stub!(:get_departments_as_json)
     end
 
     it 'should be a success' do
