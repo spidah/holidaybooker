@@ -152,7 +152,7 @@ describe Admin::AdminUsersController do
       response.should render_template(:user_item)
     end
 
-    it 'with an invalid id, should set an error and redirect to the index page' do
+    it 'with an invalid id, should return a 404 status' do
       User.should_receive(:find).with(2).and_raise(ActiveRecord::RecordNotFound)
       @user.should_not_receive(:admin=)
       put :change_admin, :id => 2
