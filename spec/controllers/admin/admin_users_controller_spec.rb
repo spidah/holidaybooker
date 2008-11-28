@@ -135,23 +135,27 @@ describe Admin::AdminUsersController do
 
   describe 'PUT change_admin' do
     it 'with an admin user, should remove admin status and render the user partial' do
-      @user.should_receive(:admin).and_return(true)
-      @user.should_receive(:admin=).with(false)
-      put :change_admin, :id => 1
+      admin = mock('user')
+      User.should_receive(:find).with(2).and_return(admin)
+      admin.should_receive(:admin).and_return(true)
+      admin.should_receive(:admin=).with(false)
+      put :change_admin, :id => 2
       response.should render_template(:user_item)
     end
 
     it 'with a non-admin user, should add admin status and render the user partial' do
-      @user.should_receive(:admin).and_return(false)
-      @user.should_receive(:admin=).with(true)
-      put :change_admin, :id => 1
+      nonadmin = mock('user')
+      User.should_receive(:find).with(2).and_return(nonadmin)
+      nonadmin.should_receive(:admin).and_return(false)
+      nonadmin.should_receive(:admin=).with(true)
+      put :change_admin, :id => 2
       response.should render_template(:user_item)
     end
 
     it 'with an invalid id, should set an error and redirect to the index page' do
-      User.should_receive(:find).with(1).and_raise(ActiveRecord::RecordNotFound)
+      User.should_receive(:find).with(2).and_raise(ActiveRecord::RecordNotFound)
       @user.should_not_receive(:admin=)
-      put :change_admin, :id => 1
+      put :change_admin, :id => 2
       response.response_code.should == 404
     end
   end
