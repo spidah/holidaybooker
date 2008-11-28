@@ -51,7 +51,7 @@ class Admin::AdminUsersController < ApplicationController
     @user.head = !@user.head
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
   rescue
-    render(:status => :not_found)
+    render(:nothing => true, :status => :not_found)
   end
 
   def change_admin
@@ -60,7 +60,7 @@ class Admin::AdminUsersController < ApplicationController
     @user.admin = !@user.admin
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
   rescue
-    render(:status => :not_found)
+    render(:nothing => true, :status => :not_found)
   end
 
   def change_department
@@ -69,7 +69,7 @@ class Admin::AdminUsersController < ApplicationController
     @user.save!
     render(:partial => 'user_item', :layout => false, :locals => {:user => @user})
   rescue
-    render(:status => :not_found)
+    render(:nothing => true, :status => :not_found)
   end
 
   private
