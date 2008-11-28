@@ -158,6 +158,12 @@ describe Admin::AdminUsersController do
       put :change_admin, :id => 2
       response.response_code.should == 404
     end
+
+    it 'with the current admin user, should return a 404 status' do
+      @user.should_not_receive(:admin=)
+      put :change_admin, :id => 1
+      response.response_code.should == 404
+    end
   end
 
   describe 'PUT change_department' do
