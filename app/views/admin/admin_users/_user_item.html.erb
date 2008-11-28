@@ -2,7 +2,7 @@
       <td><%= user.username -%></td>
       <td><%= user.firstname -%></td>
       <td><%= user.surname -%></td>
-      <td><%= user.department.name if user.department -%></td>
+      <td><%= department_link(user) -%></td>
       <td class="image"><%= head_link(user) -%></td>
       <td class="image"><%= admin_link(user) -%></td>
       <td><%= print_roles(user.roles) -%></td>

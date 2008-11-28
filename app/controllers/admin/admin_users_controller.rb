@@ -7,8 +7,9 @@ class Admin::AdminUsersController < ApplicationController
   verify :method => :delete, :only => :destroy, :redirect_to => :index
 
   def index
-    include_extra_javascript('admin/users.js')
+    include_extra_javascript('jeditable.js', 'admin/users.js')
     @users = User.pagination(params[:page], params[:sort] || 'username', params[:dir] ? 'DESC' : 'ASC')
+    @departments = get_departments_as_json
   end
 
   def edit
@@ -69,4 +70,10 @@ class Admin::AdminUsersController < ApplicationController
   rescue
     render(:status => :not_found)
   end
+
+  private
+    def get_departments_as_json
+      # returns format of {'id':'text','id':'text',...}
+      "{#{Department.all.collect {|item| "'#{item.id}':'#{item.name}'"}.join(',')}}"
+    end
 end

@@ -142,6 +142,21 @@ fieldset {
       clear: both;
     }
 
+    #content div.department {
+      color: #00f;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #content div.department form {
+      padding: 0;
+      margin: 0;
+    }
+
+    #content div.department form select {
+      margin-right: 0.5em;
+    }
+
   #footer {
     clear: both;
     font-size: 12px;
@@ -178,6 +193,10 @@ fieldset {
   font-weight: bold;
   margin: 0;
   text-indent: 0;
+}
+
+a.solid:link, a.solid:visited, a.solid:active {
+  color: #00f;
 }
 
 a.sort-header:link, a.sort-header:visited, a.sort-header:active {
