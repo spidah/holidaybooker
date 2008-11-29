@@ -136,14 +136,6 @@ describe 'User Oliver, with long holiday' do
     @holiday.in_month?(Date.today + 1.month).should == false
   end
 
-  it 'should not be in two months' do
-    @holiday.in_month?(Date.today + 2.months).should == false
-  end
-
-  it 'should be in three months' do
-    @holiday.in_month?(Date.today + 3.months).should == true
-  end
-
   it 'should be in four months' do
     @holiday.in_month?(Date.today + 4.months).should == true
   end
@@ -152,7 +144,7 @@ describe 'User Oliver, with long holiday' do
     @holiday.in_month?(Date.today + 5.months).should == true
   end
 
-  it 'should not be in six months' do
-    @holiday.in_month?(Date.today + 6.months).should == false
+  it 'should not be in seven months' do
+    @holiday.in_month?(Date.today + 7.months).should == false
   end
 end
